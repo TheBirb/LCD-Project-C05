@@ -12,12 +12,12 @@ architecture a of tb_cont is
   component counter8
     port ( 
     clk       : IN std_logic; 
-    reset     : IN std_logic; 
-    enable    : IN std_logic;
-    load      : IN std_logic;
-    data_ini  : IN std_logic_vector(7 DOWNTO 0);
-    count     : OUT std_logic_vector(7 DOWNTO 0);
-    tc        : OUT std_logic
+    reset     : IN std_logic;
+    count     : OUT std_logic_vector(3 DOWNTO 0);
+    tc        : OUT std_logic;
+    LCD_WRN   : OUT std_logic;
+    LCD_RS    : OUT std_logic;
+    LCD_CSN   : OUT std_logic
 	  ); 
   end component ; 
 -- *** y declarar como señales internas todas las señales del port()
@@ -26,10 +26,12 @@ architecture a of tb_cont is
   signal tb_clk       : std_logic := '1'; 
   signal tb_reset     : std_logic := '1'; 
   signal tb_enable    : std_logic := '0';
-  signal tb_load      : std_logic := '0';
-  signal tb_data_ini  : std_logic_vector(7 DOWNTO 0):=(others=>'0');
-  signal tb_count     : std_logic_vector(7 DOWNTO 0);
+  signal tb_count     : std_logic_vector(3 DOWNTO 0);
   signal tb_tc        : std_logic;
+  signal tb_lcd_rs    : std_logic :='0';
+  signal tb_lcd_wrn   : std_logic :='0';
+  signal tb_lcd_csn   : std_logic :='0';
+  signal tb_enable_data: std_logic :='0';
 --	...
 --	...
 --	...
@@ -40,11 +42,11 @@ begin
 -- *** incluir todas las señales del port()
     clk      => tb_clk,
     reset    => tb_reset,
-    enable   => tb_enable,
-    load     => tb_load,
-    data_ini => tb_data_ini,
     count    => tb_count,
-    tc       => tb_tc
+    tc       => tb_tc,
+    LCD_WRN  => tb_lcd_wrn,
+    LCD_CSN  => tb_lcd_csn,
+    LCD_RS   => tb_lcd_rs
     );
 
   -- definicion del reloj
@@ -55,15 +57,6 @@ begin
     begin
     wait for 50 ns;      
       tb_reset <= '0';
-    wait for 70 ns;
-      tb_data_ini <= "00000011";
-    wait for 70 ns;
-      tb_load <= '1';
-    wait for 150 ns;
-      tb_load <= '0';
-      tb_enable <= '1';
-    wait for 400 ns;
-      tb_enable <= '0';
     wait;
     end process;
 end;
