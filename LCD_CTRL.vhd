@@ -46,7 +46,7 @@ BEGIN
    PROCESS (estado_q,sel_data,OP_SETCURSOR, OP_DRAWCOLOR, FIN_CNT_PIX,LCD_init_done)
    begin
 	case estado_q is
-	 when Inicio => if LCD_init_done='1' then estado_d<=EsperaOP; else estado_d<=Inicio; end if; --al ponerlo a 1 en la sim no cambia de estado?
+	 when Inicio => if LCD_init_done='1' then estado_d<=EsperaOP; else estado_d<=Inicio; end if;
 	 when EsperaOP => if OP_SETCURSOR='1' then estado_d<=ProcesarC; elsif OP_DRAWCOLOR='1' then estado_d<=ProcesarD; else estado_d<=EsperaOP; end if;
 	 when ProcesarC => estado_d<=Estado0;
 	 when ProcesarD => estado_d<=Estado4; 
