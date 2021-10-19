@@ -22,7 +22,7 @@ ENTITY LCD_CTRL IS
   );
 END LCD_CTRL;
  
-ARCHITECTURE arch1 OF counter8 IS
+ARCHITECTURE arch1 OF LCD_CTRL IS
    TYPE ESTADO IS (Estado0,Estado1,Estado2, Estado3,Estado4,Estado5,Estado6,Estado7,Estado8,Estado9,Estado10,Estado11,Estado12,ProcesarC,EsperaOP,Inicio,ProcesarD);
    SIGNAL estado_q, estado_d: ESTADO;
    SIGNAL sel_data : unsigned(2 DOWNTO 0);
