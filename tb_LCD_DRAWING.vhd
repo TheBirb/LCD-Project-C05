@@ -23,7 +23,7 @@ architecture a of tb_draw is
     YROW          : OUT std_logic_vector(8 DOWNTO 0);
     OP_DRAWCOLOUR : OUT std_logic;
     RGB           : OUT std_logic_vector(15 DOWNTO 0);
-    NUM_PIX       : OUT std_logic_vector(16 DOWNTO 0);
+    NUM_PIX       : OUT std_logic_vector(16 DOWNTO 0)
 	  ); 
   end component ; 
 -- *** y declarar como señales internas todas las señales del port()
@@ -39,10 +39,9 @@ architecture a of tb_draw is
   signal tb_op_setcursor : std_logic :='0';
   signal tb_xcol : std_logic_vector (7 downto 0);
   signal tb_yrow : std_logic_vector (8 downto 0);
-  signal tb_drawcolour: std_logic:='0';
+  signal tb_op_drawcolour: std_logic:='0';
   signal tb_rgb: std_logic_vector (15 downto 0);
   signal tb_num_pix: std_logic_vector (16 downto 0);
-  signal tb_rgb : std_logic_vector (15 downto 0);
 
 --	...
 --	...
