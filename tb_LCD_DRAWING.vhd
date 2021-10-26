@@ -31,7 +31,7 @@ architecture a of tb_draw is
 -- *** Además, pueden inicializarse las entradas para t=0
   signal tb_clk       : std_logic := '1'; 
   signal tb_reset     : std_logic := '1'; 
-  signal tb_del_screen : std_logic:='1';
+  signal tb_del_screen : std_logic:='0';
   signal tb_draw_diag    : std_logic := '0';
   signal tb_colour_code    : std_logic_vector (1 downto 0);
   signal tb_done_cursor   : std_logic :='0';

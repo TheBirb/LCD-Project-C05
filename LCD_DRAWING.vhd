@@ -25,8 +25,10 @@ ARCHITECTURE arch1 OF LCD_DRAWING IS
    SIGNAL estado_q, estado_d: ESTADO;
    SIGNAL cont_x  : unsigned (7 DOWNTO 0);
    SIGNAL cont_y  : unsigned (8 DOWNTO 0);
-   SIGNAL LD_CONT_X  : std_logic;
-   SIGNAL LD_CONT_Y  : std_logic;
+   SIGNAL EN_CONT_X  : std_logic;
+   SIGNAL EN_CONT_Y  : std_logic;
+   SIGNAL RES_CONT_X  : std_logic;
+   SIGNAL RES_CONT_Y  : std_logic;
    SIGNAL color  : unsigned (1 DOWNTO 0);
    SIGNAL LD_REG_COLOR : std_logic;   
 
@@ -34,7 +36,7 @@ BEGIN
    PROCESS (estado_q,DEL_SCREEN,DRAW_DIAG,DONE_CURSOR,DONE_COLOUR,COLOUR_CODE,CONT_Y,CONT_X)
    begin
 	case estado_q is
-	 when Inicio => if DEL_SCREEN='1' then estado_d<=Posicion_Borrar; elsif DRAW_DIAG='1' then estado_d<=Inicio; else estado_d<=Inicio; end if;
+	 when Inicio => if DEL_SCREEN='1' then estado_d<=Posicion_Borrar; elsif DRAW_DIAG='1' then estado_d<=Posicion_D; else estado_d<=Inicio; end if;
 	 when Fin => estado_d<=Inicio;
 	 when Esp1 => if DONE_CURSOR='1' and COLOUR_CODE="01" then estado_d<=Rojo; elsif DONE_CURSOR='1' and COLOUR_CODE="10" then estado_d<=Verde; elsif DONE_CURSOR='1' and COLOUR_CODE="11" then estado_d<=Azul; else estado_d<=Esp1; end if;
 	 when Esp2 => if DONE_COLOUR='1' then estado_d<=Avanza_D; else estado_d<=Esp2; end if; 
@@ -57,13 +59,16 @@ BEGIN
 
 OP_SETCURSOR <='1' when (estado_q=Posicion_Borrar) or (estado_q=Posicion_D) or (estado_q=Avanza_D) or (estado_q=Res_X) else '0';
 OP_DRAWCOLOUR <='1' when (estado_q=Dibujar_Borrar) or (estado_q=Dib_D) else '0';
-XCOL <= "00000000" when (estado_q=Posicion_Borrar) or (estado_q=Posicion_D) or (estado_q=Res_X)  else std_logic_vector(cont_x);
-YROW <= "000000000" when (estado_q=Posicion_Borrar) or (estado_q=Posicion_D) else std_logic_vector(cont_y);
-LD_CONT_X <= '1' when (estado_q=Posicion_D) or (estado_q=Avanza_D) else '0';
-LD_CONT_Y <= '1' when (estado_q=Posicion_D) or (estado_q=Avanza_D) else '0';
+XCOL <= std_logic_vector(cont_x);
+YROW <= std_logic_vector(cont_y);
+EN_CONT_X <= '1' when (estado_q=Avanza_D) else '0';
+EN_CONT_Y <= '1' when (estado_q=Avanza_D) else '0';
+RES_CONT_X <= '1' when (estado_q=Dibujar_Borrar) or (estado_q=Posicion_D) or (estado_q=Res_X) else '0';
+RES_CONT_Y <= '1' when (estado_q=Dibujar_Borrar) or (estado_q=Posicion_D) else '0';
 LD_REG_COLOR <='1' when (estado_q=Rojo) or (estado_q=Verde) or (estado_q=Azul) or (estado_q=Dibujar_Borrar) else '0';
 NUM_PIX <= "00000000000000101" when (estado_q=Dib_D) else "10010110000000000" when (estado_q=Dibujar_Borrar) else "00000000000000000";
 RGB <= "0000000000000000" when (color="00") else "1111100000000000" when (color="01") else "0000011111100000" when (color="10") else "0000000000011111" when (color="11") else "0000000000000000";
+
 --registro de estado
    PROCESS (clk,reset)
    begin
@@ -88,8 +93,10 @@ RGB <= "0000000000000000" when (color="00") else "1111100000000000" when (color=
 	if reset = '1' then
 		cont_x<= (others => '0');
 	elsif clk'event AND  clk='1' then
-		if LD_CONT_X='1' then
+		if EN_CONT_X='1' then
 			cont_x <= cont_x +1;
+		elsif RES_CONT_X='1' then
+			cont_x <= "00000000";
 		end if;
 	end if;
    end process;
@@ -99,8 +106,10 @@ RGB <= "0000000000000000" when (color="00") else "1111100000000000" when (color=
 	if reset = '1' then
 		cont_y<= (others => '0');
 	elsif clk'event AND  clk='1' then
-		if LD_CONT_Y='1' then
+		if EN_CONT_Y='1' then
 			cont_y <= cont_y +1;
+		elsif RES_CONT_Y='1' then
+			cont_y <= "000000000";
 		end if;
 	end if;
    end process;
