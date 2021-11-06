@@ -52,10 +52,10 @@ BEGIN
    when Inicio => if LCD_init_done='1' then 
                       estado_d<=EsperaOP; 
                     else 
-                      estado_d<=Inicio;Ç
+                      estado_d<=Inicio;
                     end if;
-   when EsperaOP => if OP_SETCURSOR='1' then e
-                      stado_d<=ProcesarC; 
+   when EsperaOP => if OP_SETCURSOR='1' then 
+                      estado_d<=ProcesarC; 
                     elsif OP_DRAWCOLOUR='1' then 
                       estado_d<=ProcesarD; 
                     else 
