@@ -12,26 +12,26 @@ architecture a of tb_draw is
   component LCD_DRAWING
     port ( 
     clk           : IN std_logic; 
-    reset         : IN std_logic; 
+    reset_l       : IN std_logic; 
     DEL_SCREEN    : IN std_logic;
     DRAW_DIAG     : IN std_logic;
-    COLOUR_CODE   : IN std_logic_vector(1 DOWNTO 0);
-    DONE_CURSOR   : IN std_logic;
-    DONE_COLOUR   : IN std_logic;
+    COLOUR        : IN std_logic_vector(1 DOWNTO 0);
+    DONE_SETCURSOR   : IN std_logic;
+    DONE_DRAWCOLOR   : IN std_logic;
     OP_SETCURSOR  : OUT std_logic;
     XCOL          : OUT std_logic_vector(7 DOWNTO 0);
     YROW          : OUT std_logic_vector(8 DOWNTO 0);
     OP_DRAWCOLOUR : OUT std_logic;
     RGB           : OUT std_logic_vector(15 DOWNTO 0);
-    NUM_PIX       : OUT std_logic_vector(16 DOWNTO 0)
-	  ); 
+    NUMPIX       : OUT std_logic_vector(16 DOWNTO 0)
+  ); 
   end component ; 
 -- *** y declarar como señales internas todas las señales del port()
 -- *** usando el mismo nombre
 -- *** Además, pueden inicializarse las entradas para t=0
   signal tb_clk       : std_logic := '1'; 
-  signal tb_reset     : std_logic := '1'; 
-  signal tb_del_screen : std_logic:='0';
+  signal tb_reset     : std_logic := '0'; 
+  signal tb_del_screen : std_logic:='1';
   signal tb_draw_diag    : std_logic := '0';
   signal tb_colour_code    : std_logic_vector (1 downto 0);
   signal tb_done_cursor   : std_logic :='0';
@@ -52,28 +52,28 @@ begin
   port map ( 
 -- *** incluir todas las señales del port()
     clk      => tb_clk,
-    reset    => tb_reset,
+    reset_l    => tb_reset,
     DEL_SCREEN  => tb_del_screen,
     DRAW_DIAG  => tb_draw_diag,
-    COLOUR_CODE   => tb_colour_code,
-    DONE_CURSOR => tb_done_cursor,
-    DONE_COLOUR => tb_done_colour,
+    COLOUR   => tb_colour_code,
+    DONE_SETCURSOR => tb_done_cursor,
+    DONE_DRAWCOLOR => tb_done_colour,
     OP_SETCURSOR => tb_op_setcursor,
     XCOL => tb_xcol,
     YROW => tb_yrow,
     OP_DRAWCOLOUR => tb_op_drawcolour,
     RGB => tb_rgb,
-    NUM_PIX => tb_num_pix
+    NUMPIX => tb_num_pix
     );
 
   -- definicion del reloj
-  tb_clk <= not tb_clk after 10 ns; -- per?odo 20ns -> 50 MHz
+  tb_clk <= not tb_clk after 20 ns; -- per?odo 20ns -> 50 MHz
 
   -- definicion de estimulos de entrada
   process
     begin
-    wait for 50 ns;      
-      tb_reset <= '0';
+    wait for 20 ns;      
+      tb_reset <= '1';
     wait;
     end process;
 end;
