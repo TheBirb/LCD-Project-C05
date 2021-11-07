@@ -41,23 +41,97 @@ BEGIN
    PROCESS (estado_q,DEL_SCREEN,DRAW_DIAG,DONE_SETCURSOR,DONE_DRAWCOLOR,COLOUR,CONT_Y,CONT_X)
    begin
 	case estado_q is
-	 when Inicio => if DEL_SCREEN='1' then estado_d<=Posicion_Borrar; elsif DRAW_DIAG='1' then estado_d<=Posicion_D; else estado_d<=Inicio; end if;
+	 when Inicio => if DEL_SCREEN='1' then 
+				estado_d<=Posicion_Borrar; 
+			elsif DRAW_DIAG='1' then 
+				estado_d<=Posicion_D; 
+			else 
+				estado_d<=Inicio; 
+			end if;
 	 when Fin => estado_d<=Inicio;
-	 when Esp1 => if DONE_SETCURSOR='1' and COLOUR="01" then estado_d<=Rojo; elsif DONE_SETCURSOR='1' and COLOUR="10" then estado_d<=Verde; elsif DONE_SETCURSOR='1' and COLOUR="11" then estado_d<=Azul; elsif DONE_SETCURSOR='1' and COLOUR="00" then estado_d<=Fin; else estado_d<=Esp1; end if;
-	 when Esp2 => if DONE_DRAWCOLOR='1' then estado_d<=Avanza_D; else estado_d<=Esp2; end if; 
-	 when Esp3 => if DONE_SETCURSOR='1' and cont_y/="101000000" and cont_x/="11110000" then estado_d<=Dib_D; elsif DONE_SETCURSOR='1' and cont_y/="101000000" and cont_x="11110000" then estado_d<=Res_X; elsif DONE_SETCURSOR='1' and cont_y="101000000" then estado_d<=Fin; else estado_d<=Esp3; end if; 
-	 when Esp4 => if DONE_SETCURSOR='1' then estado_d<=Dibujar_Borrar; else estado_d<=Esp4; end if; 
-	 when Esp5 => if DONE_DRAWCOLOR='1' then estado_d<=Fin; else estado_d<=Esp5; end if;
-	 when Esp6 => if DONE_SETCURSOR='1' then estado_d<=Dib_D; else estado_d<=Esp6; end if;
-	 when Posicion_Borrar => if DONE_SETCURSOR='1' then estado_d<=Dibujar_Borrar; else estado_d<=Esp4; end if;
- 	 when Dibujar_Borrar => if DONE_DRAWCOLOR='1' then estado_d<=Fin; else estado_d<=Esp5; end if;
-	 when Posicion_D => if DONE_SETCURSOR='1' and COLOUR="01" then estado_d<=Rojo; elsif DONE_SETCURSOR='1' and COLOUR="10" then estado_d<=Verde; elsif DONE_SETCURSOR='1' and COLOUR="11" then estado_d<=Azul; elsif DONE_SETCURSOR='1' and COLOUR="00" then estado_d<=Fin; else estado_d<=Esp1; end if;
+	 when Esp1 => if DONE_SETCURSOR='1' and COLOUR="01" then 
+			estado_d<=Rojo; 
+		      elsif DONE_SETCURSOR='1' and COLOUR="10" then 
+			estado_d<=Verde; 
+		      elsif DONE_SETCURSOR='1' and COLOUR="11" then 
+			estado_d<=Azul; 
+		      elsif DONE_SETCURSOR='1' and COLOUR="00" then 
+		        estado_d<=Fin; 
+		      else 
+			estado_d<=Esp1; 
+		      end if;
+	 when Esp2 => if DONE_DRAWCOLOR='1' then 
+			estado_d<=Avanza_D; 
+		      else 
+			estado_d<=Esp2; 
+		      end if; 
+	 when Esp3 => if DONE_SETCURSOR='1' and cont_y/="101000000" and cont_x/="11110000" then 
+			estado_d<=Dib_D; 
+		      elsif DONE_SETCURSOR='1' and cont_y/="101000000" and cont_x="11110000" then 
+			estado_d<=Res_X; 
+		      elsif DONE_SETCURSOR='1' and cont_y="101000000" then 
+			estado_d<=Fin; 
+		      else 
+			estado_d<=Esp3; 
+		      end if; 
+	 when Esp4 => if DONE_SETCURSOR='1' then 
+			estado_d<=Dibujar_Borrar; 
+		      else 
+			estado_d<=Esp4; 
+		      end if; 
+	 when Esp5 => if DONE_DRAWCOLOR='1' then 
+			estado_d<=Fin;
+		      else 
+			estado_d<=Esp5; 
+		      end if;
+	 when Esp6 => if DONE_SETCURSOR='1' then 
+			estado_d<=Dib_D; 
+		      else 
+			estado_d<=Esp6; 
+		      end if;
+	 when Posicion_Borrar => if DONE_SETCURSOR='1' then 
+					estado_d<=Dibujar_Borrar; 
+				 else 
+					estado_d<=Esp4; 
+				 end if;
+ 	 when Dibujar_Borrar => if DONE_DRAWCOLOR='1' then 
+					estado_d<=Fin; 
+				else 
+					estado_d<=Esp5; 
+				end if;
+	 when Posicion_D => if DONE_SETCURSOR='1' and COLOUR="01" then 
+				estado_d<=Rojo; 
+			    elsif DONE_SETCURSOR='1' and COLOUR="10" then 
+				estado_d<=Verde; 
+			    elsif DONE_SETCURSOR='1' and COLOUR="11" then 
+				estado_d<=Azul; 
+			    elsif DONE_SETCURSOR='1' and COLOUR="00" then 
+				estado_d<=Fin; 
+			    else 
+				estado_d<=Esp1; 
+			    end if;
 	 when Rojo => estado_d<=Dib_D;
 	 when Verde => estado_d<=Dib_D;
 	 when Azul => estado_d<=Dib_D;
-	 when Dib_D => if DONE_DRAWCOLOR='1' then estado_d<=Avanza_D; else estado_d<=Esp2; end if;
-	 when Avanza_D => if DONE_SETCURSOR='1' and cont_y/="101000000" and cont_x/="11110000" then estado_d<=Dib_D; elsif DONE_SETCURSOR='1' and cont_y/="101000000" and cont_x="11110000" then estado_d<=Res_X; elsif DONE_SETCURSOR='1' and cont_y="101000000" then estado_d<=Fin; else estado_d<=Esp3; end if;
-	 when Res_X => if DONE_SETCURSOR='1' then estado_d<=Dib_D; else estado_d<=Esp6; end if;
+	 when Dib_D => if DONE_DRAWCOLOR='1' then 
+				estado_d<=Avanza_D; 
+		       else 
+				estado_d<=Esp2; 
+		       end if;
+	 when Avanza_D => if DONE_SETCURSOR='1' and cont_y/="101000000" and cont_x/="11110000" then 
+				estado_d<=Dib_D; 
+			  elsif DONE_SETCURSOR='1' and cont_y/="101000000" and cont_x="11110000" then 
+				estado_d<=Res_X; 
+			  elsif DONE_SETCURSOR='1' and cont_y="101000000" then 
+				estado_d<=Fin; 
+			  else 
+				estado_d<=Esp3; 
+			  end if;
+	 when Res_X => if DONE_SETCURSOR='1' then 
+				estado_d<=Dib_D; 
+		       else 
+				estado_d<=Esp6; 
+		       end if;
 	 when others => estado_d<=Inicio;
 	end case;
    end process;
@@ -73,7 +147,11 @@ RES_CONT_Y <= '1' when (estado_q=Dibujar_Borrar) or (estado_q=Posicion_D) else '
 LD_REG_COLOR <='1' when (estado_q=Rojo) or (estado_q=Verde) or (estado_q=Azul) else '0';
 LD_COLOR_N <='1' when (estado_q=Posicion_Borrar) else '0';
 NUMPIX <= std_logic_vector(num_pix);
-RGB <= "0000000000000000" when (color="00") else "1111100000000000" when (color="01") else "0000011111100000" when (color="10") else "0000000000011111" when (color="11") else "0000000000000000";
+RGB <= "0000000000000000" when (color="00") 
+	else "1111100000000000" when (color="01") 
+	else "0000011111100000" when (color="10") 
+	else "0000000000011111" when (color="11") 
+	else "0000000000000000";
 LD_NUMPIX_5 <= '1' when (estado_q=Posicion_D) else '0';
 LD_NUMPIX_A <= '1' when (estado_q=Posicion_Borrar) else '0';
 RS_NUMPIX <= '1' when (estado_q=Fin) else '0';
@@ -139,4 +217,3 @@ RS_NUMPIX <= '1' when (estado_q=Fin) else '0';
    end process;
 
 END arch1;
-
