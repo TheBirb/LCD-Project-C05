@@ -1,0 +1,79 @@
+
+State Machine - |DE1SOC_TOP|LCD_UART:DUT_LCD_UART|estado_q
+Name estado_q.TiempoDat estado_q.TiempoRxD estado_q.ResetDeDatos estado_q.Fin estado_q.EnviarDiagonal estado_q.EnviarBorrado estado_q.ProcesarDato estado_q.RecibirDat estado_q.EsperaComando estado_q.Inicio 
+estado_q.Inicio 0 0 0 0 0 0 0 0 0 0 
+estado_q.EsperaComando 0 0 0 0 0 0 0 0 1 1 
+estado_q.RecibirDat 0 0 0 0 0 0 0 1 0 1 
+estado_q.ProcesarDato 0 0 0 0 0 0 1 0 0 1 
+estado_q.EnviarBorrado 0 0 0 0 0 1 0 0 0 1 
+estado_q.EnviarDiagonal 0 0 0 0 1 0 0 0 0 1 
+estado_q.Fin 0 0 0 1 0 0 0 0 0 1 
+estado_q.ResetDeDatos 0 0 1 0 0 0 0 0 0 1 
+estado_q.TiempoRxD 0 1 0 0 0 0 0 0 0 1 
+estado_q.TiempoDat 1 0 0 0 0 0 0 0 0 1 
+
+State Machine - |DE1SOC_TOP|LCD_DRAWING:DUT_LCD_Drawing|estado_q
+Name estado_q.Res_X estado_q.Avanza_D estado_q.Dib_D estado_q.Azul estado_q.Verde estado_q.Rojo estado_q.Posicion_D estado_q.Dibujar_Borrar estado_q.Posicion_Borrar estado_q.Fin estado_q.Esp1 estado_q.Esp6 estado_q.Esp5 estado_q.Esp4 estado_q.Esp3 estado_q.Esp2 estado_q.Inicio 
+estado_q.Inicio 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+estado_q.Esp2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+estado_q.Esp3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+estado_q.Esp4 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+estado_q.Esp5 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+estado_q.Esp6 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+estado_q.Esp1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+estado_q.Fin 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+estado_q.Posicion_Borrar 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+estado_q.Dibujar_Borrar 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+estado_q.Posicion_D 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+estado_q.Rojo 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+estado_q.Verde 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+estado_q.Azul 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+estado_q.Dib_D 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+estado_q.Avanza_D 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+estado_q.Res_X 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |DE1SOC_TOP|LCD_CTRL:DUT_LCD_Ctrl|estado_q
+Name estado_q.ProcesarD estado_q.CicloC1 estado_q.EsperaOP estado_q.ProcesarC estado_q.FinColor estado_q.FinCursor estado_q.MandarDato estado_q.MandarComando estado_q.MandarPix estado_q.MandarComDraw estado_q.CicloD3 estado_q.CicloD2 estado_q.CicloD1 estado_q.CicloC3 estado_q.CicloC2 estado_q.Inicio 
+estado_q.Inicio 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+estado_q.CicloC2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+estado_q.CicloC3 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+estado_q.CicloD1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+estado_q.CicloD2 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+estado_q.CicloD3 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+estado_q.MandarComDraw 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+estado_q.MandarPix 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+estado_q.MandarComando 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+estado_q.MandarDato 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+estado_q.FinCursor 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+estado_q.FinColor 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+estado_q.ProcesarC 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+estado_q.EsperaOP 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+estado_q.CicloC1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+estado_q.ProcesarD 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitLCD:DUT_InitLCD|ep3
+Name ep3.e_End_INIT_LT24 ep3.e_End_Send_CMD_DATA ep3.e_wait_sendCMD_DATA ep3.e_read_CMD_DATA3 ep3.e_read_CMD_DATA2 ep3.e_read_CMD_DATA ep3.e_init3 
+ep3.e_init3 0 0 0 0 0 0 0 
+ep3.e_read_CMD_DATA 0 0 0 0 0 1 1 
+ep3.e_read_CMD_DATA2 0 0 0 0 1 0 1 
+ep3.e_read_CMD_DATA3 0 0 0 1 0 0 1 
+ep3.e_wait_sendCMD_DATA 0 0 1 0 0 0 1 
+ep3.e_End_Send_CMD_DATA 0 1 0 0 0 0 1 
+ep3.e_End_INIT_LT24 1 0 0 0 0 0 1 
+
+State Machine - |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitLCD:DUT_InitLCD|ep2
+Name ep2.e_End_CMD_DATA ep2.e_wait1_sendByte ep2.e_send_CMD_DATA2 ep2.e_send_CMD_DATA ep2.e_init2 
+ep2.e_init2 0 0 0 0 0 
+ep2.e_send_CMD_DATA 0 0 0 1 1 
+ep2.e_send_CMD_DATA2 0 0 1 0 1 
+ep2.e_wait1_sendByte 0 1 0 0 1 
+ep2.e_End_CMD_DATA 1 0 0 0 1 
+
+State Machine - |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET|ep
+Name ep.e_done ep.e_wait2 ep.e_wait1 ep.e_wait0 ep.e_wait00 ep.e_init 
+ep.e_init 0 0 0 0 0 0 
+ep.e_wait00 0 0 0 0 1 1 
+ep.e_wait0 0 0 0 1 0 1 
+ep.e_wait1 0 0 1 0 0 1 
+ep.e_wait2 0 1 0 0 0 1 
+ep.e_done 1 0 0 0 0 1 

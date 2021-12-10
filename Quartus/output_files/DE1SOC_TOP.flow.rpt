@@ -1,5 +1,5 @@
 Flow report for DE1SOC_TOP
-Sun Nov 07 22:37:16 2021
+Fri Dec 10 00:35:37 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -40,16 +40,16 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Flow Summary                                                                  ;
 +---------------------------------+---------------------------------------------+
-; Flow Status                     ; Successful - Sun Nov 07 22:37:00 2021       ;
+; Flow Status                     ; Successful - Fri Dec 10 00:35:29 2021       ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                   ; DE1SOC_TOP                                  ;
 ; Top-level Entity Name           ; DE1SOC_TOP                                  ;
 ; Family                          ; Cyclone V                                   ;
 ; Device                          ; 5CSEMA5F31C6                                ;
 ; Timing Models                   ; Final                                       ;
-; Logic utilization (in ALMs)     ; 178 / 32,070 ( < 1 % )                      ;
-; Total registers                 ; 233                                         ;
-; Total pins                      ; 47 / 457 ( 10 % )                           ;
+; Logic utilization (in ALMs)     ; 198 / 32,070 ( < 1 % )                      ;
+; Total registers                 ; 278                                         ;
+; Total pins                      ; 83 / 457 ( 18 % )                           ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0 / 4,065,280 ( 0 % )                       ;
 ; Total DSP Blocks                ; 0 / 87 ( 0 % )                              ;
@@ -67,7 +67,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/07/2021 22:34:39 ;
+; Start date & time ; 12/10/2021 00:34:23 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; DE1SOC_TOP          ;
 +-------------------+---------------------+
@@ -78,7 +78,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------+----------------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+----------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 145984433806716.163632087809132        ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 145984433806716.163909286311812        ; --            ; --          ; --         ;
 ; ENABLE_SIGNALTAP                    ; On                                     ; --            ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --          ; --         ;
@@ -101,11 +101,11 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:25     ; 1.0                     ; 4858 MB             ; 00:00:45                           ;
-; Fitter               ; 00:01:24     ; 1.0                     ; 6612 MB             ; 00:01:48                           ;
-; Assembler            ; 00:00:28     ; 1.0                     ; 4831 MB             ; 00:00:21                           ;
-; Timing Analyzer      ; 00:00:14     ; 1.1                     ; 5138 MB             ; 00:00:14                           ;
-; Total                ; 00:02:31     ; --                      ; --                  ; 00:03:08                           ;
+; Analysis & Synthesis ; 00:00:13     ; 1.0                     ; 4855 MB             ; 00:00:31                           ;
+; Fitter               ; 00:00:40     ; 1.0                     ; 6617 MB             ; 00:01:24                           ;
+; Assembler            ; 00:00:09     ; 1.0                     ; 4827 MB             ; 00:00:10                           ;
+; Timing Analyzer      ; 00:00:07     ; 1.2                     ; 5138 MB             ; 00:00:08                           ;
+; Total                ; 00:01:09     ; --                      ; --                  ; 00:02:13                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

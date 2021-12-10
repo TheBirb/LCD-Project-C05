@@ -16,7 +16,8 @@ ENTITY LCD_DRAWING IS
     YROW          : OUT std_logic_vector(8 DOWNTO 0);
     OP_DRAWCOLOUR : OUT std_logic;
     RGB           : OUT std_logic_vector(15 DOWNTO 0);
-    NUMPIX       : OUT std_logic_vector(16 DOWNTO 0)
+    NUMPIX        : OUT std_logic_vector(16 DOWNTO 0);
+    DONE_DRAWING  : OUT std_logic
   );
 END LCD_DRAWING;
 
@@ -89,49 +90,24 @@ BEGIN
 		      else 
 			estado_d<=Esp6; 
 		      end if;
-	 when Posicion_Borrar => if DONE_SETCURSOR='1' then 
-					estado_d<=Dibujar_Borrar; 
-				 else 
-					estado_d<=Esp4; 
-				 end if;
- 	 when Dibujar_Borrar => if DONE_DRAWCOLOR='1' then 
-					estado_d<=Fin; 
-				else 
-					estado_d<=Esp5; 
-				end if;
-	 when Posicion_D => if DONE_SETCURSOR='1' and COLOUR="01" then 
-				estado_d<=Rojo; 
-			    elsif DONE_SETCURSOR='1' and COLOUR="10" then 
-				estado_d<=Verde; 
-			    elsif DONE_SETCURSOR='1' and COLOUR="11" then 
-				estado_d<=Azul; 
-			    elsif DONE_SETCURSOR='1' and COLOUR="00" then 
-				estado_d<=Fin; 
-			    else 
-				estado_d<=Esp1; 
-			    end if;
+	 when Posicion_Borrar => estado_d<=Esp4; 
+
+ 	 when Dibujar_Borrar => estado_d<=Esp5; 
+
+	 when Posicion_D => estado_d<=Esp1; 
+
 	 when Rojo => estado_d<=Dib_D;
+
 	 when Verde => estado_d<=Dib_D;
+
 	 when Azul => estado_d<=Dib_D;
-	 when Dib_D => if DONE_DRAWCOLOR='1' then 
-				estado_d<=Avanza_D; 
-		       else 
-				estado_d<=Esp2; 
-		       end if;
-	 when Avanza_D => if DONE_SETCURSOR='1' and cont_y/="101000000" and cont_x/="11110000" then 
-				estado_d<=Dib_D; 
-			  elsif DONE_SETCURSOR='1' and cont_y/="101000000" and cont_x="11110000" then 
-				estado_d<=Res_X; 
-			  elsif DONE_SETCURSOR='1' and cont_y="101000000" then 
-				estado_d<=Fin; 
-			  else 
-				estado_d<=Esp3; 
-			  end if;
-	 when Res_X => if DONE_SETCURSOR='1' then 
-				estado_d<=Dib_D; 
-		       else 
-				estado_d<=Esp6; 
-		       end if;
+
+	 when Dib_D => estado_d<=Esp2; 
+
+	 when Avanza_D => estado_d<=Esp3; 
+
+	 when Res_X => estado_d<=Esp6; 
+
 	 when others => estado_d<=Inicio;
 	end case;
    end process;
@@ -155,6 +131,7 @@ RGB <= "0000000000000000" when (color="00")
 LD_NUMPIX_5 <= '1' when (estado_q=Posicion_D) else '0';
 LD_NUMPIX_A <= '1' when (estado_q=Posicion_Borrar) else '0';
 RS_NUMPIX <= '1' when (estado_q=Fin) else '0';
+DONE_DRAWING <= '1' when (estado_q=Fin) else '0';
 
 --registro de estado
    PROCESS (clk,reset_l)

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for DE1SOC_TOP
-Sun Nov 07 22:35:03 2021
+Fri Dec 10 00:34:37 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -13,23 +13,24 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |DE1SOC_TOP|LCD_DRAWING:DUT_LCD_Drawing|estado_q
-  9. State Machine - |DE1SOC_TOP|LCD_CTRL:DUT_LCD_Ctrl|estado_q
- 10. State Machine - |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitLCD:DUT_InitLCD|ep3
- 11. State Machine - |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitLCD:DUT_InitLCD|ep2
- 12. State Machine - |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET|ep
- 13. Registers Protected by Synthesis
- 14. User-Specified and Inferred Latches
- 15. Registers Removed During Synthesis
- 16. General Register Statistics
- 17. Inverted Register Statistics
- 18. Multiplexer Restructuring Statistics (Restructuring Performed)
- 19. Source assignments for LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET
- 20. Port Connectivity Checks: "LT24Setup:DUT_SETUP|LT24InitLCD:DUT_InitLCD|romsinc:DUT_ROM"
- 21. Port Connectivity Checks: "LT24Setup:DUT_SETUP"
- 22. Post-Synthesis Netlist Statistics for Top Partition
- 23. Elapsed Time Per Partition
- 24. Analysis & Synthesis Messages
+  8. State Machine - |DE1SOC_TOP|LCD_UART:DUT_LCD_UART|estado_q
+  9. State Machine - |DE1SOC_TOP|LCD_DRAWING:DUT_LCD_Drawing|estado_q
+ 10. State Machine - |DE1SOC_TOP|LCD_CTRL:DUT_LCD_Ctrl|estado_q
+ 11. State Machine - |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitLCD:DUT_InitLCD|ep3
+ 12. State Machine - |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitLCD:DUT_InitLCD|ep2
+ 13. State Machine - |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET|ep
+ 14. Registers Protected by Synthesis
+ 15. User-Specified and Inferred Latches
+ 16. Registers Removed During Synthesis
+ 17. General Register Statistics
+ 18. Inverted Register Statistics
+ 19. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 20. Source assignments for LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET
+ 21. Port Connectivity Checks: "LT24Setup:DUT_SETUP|LT24InitLCD:DUT_InitLCD|romsinc:DUT_ROM"
+ 22. Port Connectivity Checks: "LT24Setup:DUT_SETUP"
+ 23. Post-Synthesis Netlist Statistics for Top Partition
+ 24. Elapsed Time Per Partition
+ 25. Analysis & Synthesis Messages
 
 
 
@@ -55,14 +56,14 @@ refer to the applicable agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Sun Nov 07 22:35:03 2021       ;
+; Analysis & Synthesis Status     ; Successful - Fri Dec 10 00:34:37 2021       ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                   ; DE1SOC_TOP                                  ;
 ; Top-level Entity Name           ; DE1SOC_TOP                                  ;
 ; Family                          ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)     ; N/A                                         ;
-; Total registers                 ; 206                                         ;
-; Total pins                      ; 47                                          ;
+; Total registers                 ; 239                                         ;
+; Total pins                      ; 83                                          ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0                                           ;
 ; Total DSP Blocks                ; 0                                           ;
@@ -184,6 +185,7 @@ refer to the applicable agreement for further details.
 +----------------------------------+-----------------+-----------------------+---------------------------------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type             ; File Name with Absolute Path                                                                ; Library ;
 +----------------------------------+-----------------+-----------------------+---------------------------------------------------------------------------------------------+---------+
+; MODELSIM/LCD_UART.vhd            ; yes             ; User VHDL File        ; C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_UART.vhd       ;         ;
 ; MODELSIM/LCD_DRAWING.vhd         ; yes             ; User VHDL File        ; C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd    ;         ;
 ; MODELSIM/romsinc.vhd             ; yes             ; User VHDL File        ; C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/romsinc.vhd        ;         ;
 ; MODELSIM/LT24SetUp.vhd           ; yes             ; User VHDL File        ; C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LT24SetUp.vhd      ;         ;
@@ -200,25 +202,25 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+--------------+
 ; Resource                                    ; Usage        ;
 +---------------------------------------------+--------------+
-; Estimate of Logic utilization (ALMs needed) ; 182          ;
+; Estimate of Logic utilization (ALMs needed) ; 203          ;
 ;                                             ;              ;
-; Combinational ALUT usage for logic          ; 308          ;
+; Combinational ALUT usage for logic          ; 341          ;
 ;     -- 7 input functions                    ; 0            ;
-;     -- 6 input functions                    ; 53           ;
-;     -- 5 input functions                    ; 37           ;
-;     -- 4 input functions                    ; 34           ;
-;     -- <=3 input functions                  ; 184          ;
+;     -- 6 input functions                    ; 60           ;
+;     -- 5 input functions                    ; 38           ;
+;     -- 4 input functions                    ; 40           ;
+;     -- <=3 input functions                  ; 203          ;
 ;                                             ;              ;
-; Dedicated logic registers                   ; 206          ;
+; Dedicated logic registers                   ; 239          ;
 ;                                             ;              ;
-; I/O pins                                    ; 47           ;
+; I/O pins                                    ; 83           ;
 ;                                             ;              ;
 ; Total DSP Blocks                            ; 0            ;
 ;                                             ;              ;
 ; Maximum fan-out node                        ; KEY[0]~input ;
-; Maximum fan-out                             ; 214          ;
-; Total fan-out                               ; 1870         ;
-; Average fan-out                             ; 3.08         ;
+; Maximum fan-out                             ; 247          ;
+; Total fan-out                               ; 2190         ;
+; Average fan-out                             ; 2.80         ;
 +---------------------------------------------+--------------+
 
 
@@ -227,15 +229,35 @@ refer to the applicable agreement for further details.
 +----------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------+---------------+--------------+
 ; Compilation Hierarchy Node       ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                     ; Entity Name   ; Library Name ;
 +----------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------+---------------+--------------+
-; |DE1SOC_TOP                      ; 308 (0)             ; 206 (0)                   ; 0                 ; 0          ; 47   ; 0            ; |DE1SOC_TOP                                                             ; DE1SOC_TOP    ; work         ;
+; |DE1SOC_TOP                      ; 341 (0)             ; 239 (0)                   ; 0                 ; 0          ; 83   ; 0            ; |DE1SOC_TOP                                                             ; DE1SOC_TOP    ; work         ;
 ;    |LCD_CTRL:DUT_LCD_Ctrl|       ; 58 (58)             ; 37 (37)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1SOC_TOP|LCD_CTRL:DUT_LCD_Ctrl                                       ; LCD_CTRL      ; work         ;
-;    |LCD_DRAWING:DUT_LCD_Drawing| ; 64 (64)             ; 34 (34)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1SOC_TOP|LCD_DRAWING:DUT_LCD_Drawing                                 ; LCD_DRAWING   ; work         ;
-;    |LT24Setup:DUT_SETUP|         ; 186 (43)            ; 135 (19)                  ; 0                 ; 0          ; 0    ; 0            ; |DE1SOC_TOP|LT24Setup:DUT_SETUP                                         ; LT24Setup     ; work         ;
+;    |LCD_DRAWING:DUT_LCD_Drawing| ; 61 (61)             ; 34 (34)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1SOC_TOP|LCD_DRAWING:DUT_LCD_Drawing                                 ; LCD_DRAWING   ; work         ;
+;    |LCD_UART:DUT_LCD_UART|       ; 36 (36)             ; 34 (34)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1SOC_TOP|LCD_UART:DUT_LCD_UART                                       ; LCD_UART      ; work         ;
+;    |LT24Setup:DUT_SETUP|         ; 186 (43)            ; 134 (19)                  ; 0                 ; 0          ; 0    ; 0            ; |DE1SOC_TOP|LT24Setup:DUT_SETUP                                         ; LT24Setup     ; work         ;
 ;       |LT24InitLCD:DUT_InitLCD|  ; 39 (23)             ; 31 (24)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitLCD:DUT_InitLCD                 ; LT24InitLCD   ; work         ;
 ;          |romsinc:DUT_ROM|       ; 16 (16)             ; 7 (7)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitLCD:DUT_InitLCD|romsinc:DUT_ROM ; romsinc       ; work         ;
-;       |LT24InitReset:DUT_RESET|  ; 104 (104)           ; 85 (85)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET                 ; LT24InitReset ; work         ;
+;       |LT24InitReset:DUT_RESET|  ; 104 (104)           ; 84 (84)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET                 ; LT24InitReset ; work         ;
 +----------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------+---------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |DE1SOC_TOP|LCD_UART:DUT_LCD_UART|estado_q                                                                                                                                                                                           ;
++-------------------------+--------------------+--------------------+-----------------------+--------------+-------------------------+------------------------+-----------------------+---------------------+------------------------+-----------------+
+; Name                    ; estado_q.TiempoDat ; estado_q.TiempoRxD ; estado_q.ResetDeDatos ; estado_q.Fin ; estado_q.EnviarDiagonal ; estado_q.EnviarBorrado ; estado_q.ProcesarDato ; estado_q.RecibirDat ; estado_q.EsperaComando ; estado_q.Inicio ;
++-------------------------+--------------------+--------------------+-----------------------+--------------+-------------------------+------------------------+-----------------------+---------------------+------------------------+-----------------+
+; estado_q.Inicio         ; 0                  ; 0                  ; 0                     ; 0            ; 0                       ; 0                      ; 0                     ; 0                   ; 0                      ; 0               ;
+; estado_q.EsperaComando  ; 0                  ; 0                  ; 0                     ; 0            ; 0                       ; 0                      ; 0                     ; 0                   ; 1                      ; 1               ;
+; estado_q.RecibirDat     ; 0                  ; 0                  ; 0                     ; 0            ; 0                       ; 0                      ; 0                     ; 1                   ; 0                      ; 1               ;
+; estado_q.ProcesarDato   ; 0                  ; 0                  ; 0                     ; 0            ; 0                       ; 0                      ; 1                     ; 0                   ; 0                      ; 1               ;
+; estado_q.EnviarBorrado  ; 0                  ; 0                  ; 0                     ; 0            ; 0                       ; 1                      ; 0                     ; 0                   ; 0                      ; 1               ;
+; estado_q.EnviarDiagonal ; 0                  ; 0                  ; 0                     ; 0            ; 1                       ; 0                      ; 0                     ; 0                   ; 0                      ; 1               ;
+; estado_q.Fin            ; 0                  ; 0                  ; 0                     ; 1            ; 0                       ; 0                      ; 0                     ; 0                   ; 0                      ; 1               ;
+; estado_q.ResetDeDatos   ; 0                  ; 0                  ; 1                     ; 0            ; 0                       ; 0                      ; 0                     ; 0                   ; 0                      ; 1               ;
+; estado_q.TiempoRxD      ; 0                  ; 1                  ; 0                     ; 0            ; 0                       ; 0                      ; 0                     ; 0                   ; 0                      ; 1               ;
+; estado_q.TiempoDat      ; 1                  ; 0                  ; 0                     ; 0            ; 0                       ; 0                      ; 0                     ; 0                   ; 0                      ; 1               ;
++-------------------------+--------------------+--------------------+-----------------------+--------------+-------------------------+------------------------+-----------------------+---------------------+------------------------+-----------------+
 
 
 Encoding Type:  One-Hot
@@ -392,14 +414,15 @@ Encoding Type:  One-Hot
 Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
 
 
-+--------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                             ;
-+---------------------------------------+----------------------------------------+
-; Register name                         ; Reason for Removal                     ;
-+---------------------------------------+----------------------------------------+
-; LT24Setup:DUT_SETUP|LT24_RD_N         ; Stuck at VCC due to stuck port data_in ;
-; Total Number of Removed Registers = 1 ;                                        ;
-+---------------------------------------+----------------------------------------+
++-----------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                        ;
++-------------------------------------------------------+---------------------------------------------------+
+; Register name                                         ; Reason for Removal                                ;
++-------------------------------------------------------+---------------------------------------------------+
+; LT24Setup:DUT_SETUP|LT24_RD_N                         ; Stuck at VCC due to stuck port data_in            ;
+; LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET|ep.e_init ; Merged with LCD_UART:DUT_LCD_UART|estado_q.Inicio ;
+; Total Number of Removed Registers = 2                 ;                                                   ;
++-------------------------------------------------------+---------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -407,12 +430,12 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 206   ;
-; Number of registers using Synchronous Clear  ; 100   ;
+; Total registers                              ; 239   ;
+; Number of registers using Synchronous Clear  ; 113   ;
 ; Number of registers using Synchronous Load   ; 1     ;
-; Number of registers using Asynchronous Clear ; 199   ;
+; Number of registers using Asynchronous Clear ; 232   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 45    ;
+; Number of registers using Clock Enable       ; 69    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -434,19 +457,21 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                               ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
-; 3:1                ; 11 bits   ; 22 LEs        ; 0 LEs                ; 22 LEs                 ; Yes        ; |DE1SOC_TOP|LCD_CTRL:DUT_LCD_Ctrl|cntrgb[7]                              ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |DE1SOC_TOP|LCD_CTRL:DUT_LCD_Ctrl|cntrgb[0]                              ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |DE1SOC_TOP|LCD_UART:DUT_LCD_UART|contd[0]                               ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 0 LEs                ; 22 LEs                 ; Yes        ; |DE1SOC_TOP|LCD_CTRL:DUT_LCD_Ctrl|cntrgb[15]                             ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |DE1SOC_TOP|LCD_CTRL:DUT_LCD_Ctrl|cntrgb[16]                             ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 0 LEs                ; 26 LEs                 ; Yes        ; |DE1SOC_TOP|LCD_UART:DUT_LCD_UART|contime[2]                             ;
 ; 3:1                ; 9 bits    ; 18 LEs        ; 0 LEs                ; 18 LEs                 ; Yes        ; |DE1SOC_TOP|LCD_DRAWING:DUT_LCD_Drawing|cont_y[5]                        ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE1SOC_TOP|LCD_DRAWING:DUT_LCD_Drawing|cont_x[2]                        ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |DE1SOC_TOP|LCD_CTRL:DUT_LCD_Ctrl|sel_data[1]                            ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET|cont_15usec[3]   ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET|cont_10usec[5]   ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET|cont_5msec[7]    ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET|NumTicsXmSec[14] ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |DE1SOC_TOP|LCD_CTRL:DUT_LCD_Ctrl|sel_data[2]                            ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET|cont_15usec[1]   ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET|cont_10usec[7]   ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET|cont_5msec[6]    ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET|NumTicsXmSec[11] ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET|NumTicsXuSec[0]  ;
-; 6:1                ; 8 bits    ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24_D[15]                               ;
+; 6:1                ; 8 bits    ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24_D[11]                               ;
 ; 8:1                ; 3 bits    ; 15 LEs        ; 15 LEs               ; 0 LEs                  ; Yes        ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24_D[6]                                ;
-; 8:1                ; 4 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24_D[0]                                ;
+; 8:1                ; 4 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |DE1SOC_TOP|LT24Setup:DUT_SETUP|LT24_D[3]                                ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |DE1SOC_TOP|LCD_CTRL:DUT_LCD_Ctrl|estado_d.MandarDato                    ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
 
@@ -500,29 +525,30 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 206                         ;
-;     CLR               ; 81                          ;
+; arriav_ff             ; 239                         ;
+;     CLR               ; 90                          ;
 ;     CLR SCLR          ; 72                          ;
 ;     CLR SLD           ; 1                           ;
-;     ENA CLR           ; 17                          ;
-;     ENA CLR SCLR      ; 28                          ;
+;     ENA CLR           ; 28                          ;
+;     ENA CLR SCLR      ; 41                          ;
 ;     plain             ; 7                           ;
-; arriav_lcell_comb     ; 312                         ;
-;     arith             ; 112                         ;
-;         1 data inputs ; 106                         ;
+; arriav_io_obuf        ; 36                          ;
+; arriav_lcell_comb     ; 346                         ;
+;     arith             ; 125                         ;
+;         1 data inputs ; 119                         ;
 ;         2 data inputs ; 6                           ;
-;     normal            ; 200                         ;
+;     normal            ; 221                         ;
 ;         0 data inputs ; 2                           ;
-;         1 data inputs ; 6                           ;
-;         2 data inputs ; 24                          ;
-;         3 data inputs ; 44                          ;
-;         4 data inputs ; 34                          ;
-;         5 data inputs ; 37                          ;
-;         6 data inputs ; 53                          ;
-; boundary_port         ; 47                          ;
+;         1 data inputs ; 7                           ;
+;         2 data inputs ; 27                          ;
+;         3 data inputs ; 47                          ;
+;         4 data inputs ; 40                          ;
+;         5 data inputs ; 38                          ;
+;         6 data inputs ; 60                          ;
+; boundary_port         ; 83                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 4.10                        ;
-; Average LUT depth     ; 2.11                        ;
+; Average LUT depth     ; 2.00                        ;
 +-----------------------+-----------------------------+
 
 
@@ -531,7 +557,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:03     ;
+; Top            ; 00:00:01     ;
 +----------------+--------------+
 
 
@@ -541,12 +567,15 @@ Note: All latches listed above may not be present at the end of synthesis due to
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Sun Nov 07 22:34:36 2021
+    Info: Processing started: Fri Dec 10 00:34:23 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE1SOC_TOP -c DE1SOC_TOP
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (12021): Found 2 design units, including 1 entities, in source file modelsim/lcd_uart.vhd
+    Info (12022): Found design unit 1: LCD_UART-arch1 File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_UART.vhd Line: 16
+    Info (12023): Found entity 1: LCD_UART File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_UART.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file modelsim/lcd_drawing.vhd
-    Info (12022): Found design unit 1: LCD_DRAWING-arch1 File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 23
+    Info (12022): Found design unit 1: LCD_DRAWING-arch1 File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 24
     Info (12023): Found entity 1: LCD_DRAWING File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file modelsim/romsinc.vhd
     Info (12022): Found design unit 1: romsinc-a File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/romsinc.vhd Line: 14
@@ -570,15 +599,15 @@ Warning (12125): Using design file de1soc_top.vhd, which is not specified as a d
     Info (12022): Found design unit 1: DE1SOC_TOP-rtl_0 File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 62
     Info (12023): Found entity 1: DE1SOC_TOP File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 24
 Info (12127): Elaborating entity "DE1SOC_TOP" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at de1soc_top.vhd(151): object "reset" assigned a value but never read File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 151
-Warning (10873): Using initial value X (don't care) for net "LEDR[6..0]" at de1soc_top.vhd(36) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 36
-Info (12128): Elaborating entity "LT24Setup" for hierarchy "LT24Setup:DUT_SETUP" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 187
+Warning (10036): Verilog HDL or VHDL warning at de1soc_top.vhd(163): object "reset" assigned a value but never read File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 163
+Warning (10873): Using initial value X (don't care) for net "LEDR[5..0]" at de1soc_top.vhd(36) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 36
+Info (12128): Elaborating entity "LT24Setup" for hierarchy "LT24Setup:DUT_SETUP" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 203
 Info (12128): Elaborating entity "LT24InitReset" for hierarchy "LT24Setup:DUT_SETUP|LT24InitReset:DUT_RESET" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LT24SetUp.vhd Line: 108
 Warning (10036): Verilog HDL or VHDL warning at LT24InitReset.vhd(65): object "to_10msec" assigned a value but never read File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LT24InitReset.vhd Line: 65
 Info (12128): Elaborating entity "LT24InitLCD" for hierarchy "LT24Setup:DUT_SETUP|LT24InitLCD:DUT_InitLCD" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LT24SetUp.vhd Line: 122
 Warning (10036): Verilog HDL or VHDL warning at LT24InitLCD.vhd(77): object "RomData" assigned a value but never read File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LT24InitLCD.vhd Line: 77
 Info (12128): Elaborating entity "romsinc" for hierarchy "LT24Setup:DUT_SETUP|LT24InitLCD:DUT_InitLCD|romsinc:DUT_ROM" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LT24InitLCD.vhd Line: 88
-Info (12128): Elaborating entity "LCD_CTRL" for hierarchy "LCD_CTRL:DUT_LCD_Ctrl" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 211
+Info (12128): Elaborating entity "LCD_CTRL" for hierarchy "LCD_CTRL:DUT_LCD_Ctrl" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 227
 Warning (10036): Verilog HDL or VHDL warning at LCD_CTRL.vhd(30): object "x" assigned a value but never read File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_CTRL.vhd Line: 30
 Warning (10036): Verilog HDL or VHDL warning at LCD_CTRL.vhd(31): object "y" assigned a value but never read File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_CTRL.vhd Line: 31
 Warning (10492): VHDL Process Statement warning at LCD_CTRL.vhd(138): signal "LD_X" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_CTRL.vhd Line: 138
@@ -620,36 +649,75 @@ Info (10041): Inferred latch for "rgbreg[12]" at LCD_CTRL.vhd(164) File: C:/UNI/
 Info (10041): Inferred latch for "rgbreg[13]" at LCD_CTRL.vhd(164) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_CTRL.vhd Line: 164
 Info (10041): Inferred latch for "rgbreg[14]" at LCD_CTRL.vhd(164) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_CTRL.vhd Line: 164
 Info (10041): Inferred latch for "rgbreg[15]" at LCD_CTRL.vhd(164) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_CTRL.vhd Line: 164
-Info (12128): Elaborating entity "LCD_DRAWING" for hierarchy "LCD_DRAWING:DUT_LCD_Drawing" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 244
-Warning (10492): VHDL Process Statement warning at LCD_DRAWING.vhd(173): signal "LD_REG_COLOR" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 173
-Warning (10492): VHDL Process Statement warning at LCD_DRAWING.vhd(175): signal "LD_COLOR_N" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 175
-Warning (10631): VHDL Process Statement warning at LCD_DRAWING.vhd(169): inferring latch(es) for signal or variable "color", which holds its previous value in one or more paths through the process File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 169
-Warning (10492): VHDL Process Statement warning at LCD_DRAWING.vhd(184): signal "LD_NUMPIX_5" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 184
-Warning (10492): VHDL Process Statement warning at LCD_DRAWING.vhd(186): signal "LD_NUMPIX_A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 186
-Warning (10492): VHDL Process Statement warning at LCD_DRAWING.vhd(188): signal "RS_NUMPIX" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 188
-Warning (10631): VHDL Process Statement warning at LCD_DRAWING.vhd(180): inferring latch(es) for signal or variable "num_pix", which holds its previous value in one or more paths through the process File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "num_pix[0]" at LCD_DRAWING.vhd(180) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "num_pix[1]" at LCD_DRAWING.vhd(180) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "num_pix[2]" at LCD_DRAWING.vhd(180) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "num_pix[3]" at LCD_DRAWING.vhd(180) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "num_pix[4]" at LCD_DRAWING.vhd(180) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "num_pix[5]" at LCD_DRAWING.vhd(180) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "num_pix[6]" at LCD_DRAWING.vhd(180) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "num_pix[7]" at LCD_DRAWING.vhd(180) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "num_pix[8]" at LCD_DRAWING.vhd(180) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "num_pix[9]" at LCD_DRAWING.vhd(180) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "num_pix[10]" at LCD_DRAWING.vhd(180) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "num_pix[11]" at LCD_DRAWING.vhd(180) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "num_pix[12]" at LCD_DRAWING.vhd(180) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "num_pix[13]" at LCD_DRAWING.vhd(180) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "num_pix[14]" at LCD_DRAWING.vhd(180) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "num_pix[15]" at LCD_DRAWING.vhd(180) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "num_pix[16]" at LCD_DRAWING.vhd(180) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 180
-Info (10041): Inferred latch for "color[0]" at LCD_DRAWING.vhd(169) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 169
-Info (10041): Inferred latch for "color[1]" at LCD_DRAWING.vhd(169) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 169
+Info (12128): Elaborating entity "LCD_DRAWING" for hierarchy "LCD_DRAWING:DUT_LCD_Drawing" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 260
+Warning (10492): VHDL Process Statement warning at LCD_DRAWING.vhd(150): signal "LD_REG_COLOR" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 150
+Warning (10492): VHDL Process Statement warning at LCD_DRAWING.vhd(152): signal "LD_COLOR_N" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 152
+Warning (10631): VHDL Process Statement warning at LCD_DRAWING.vhd(146): inferring latch(es) for signal or variable "color", which holds its previous value in one or more paths through the process File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 146
+Warning (10492): VHDL Process Statement warning at LCD_DRAWING.vhd(161): signal "LD_NUMPIX_5" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 161
+Warning (10492): VHDL Process Statement warning at LCD_DRAWING.vhd(163): signal "LD_NUMPIX_A" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 163
+Warning (10492): VHDL Process Statement warning at LCD_DRAWING.vhd(165): signal "RS_NUMPIX" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 165
+Warning (10631): VHDL Process Statement warning at LCD_DRAWING.vhd(157): inferring latch(es) for signal or variable "num_pix", which holds its previous value in one or more paths through the process File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "num_pix[0]" at LCD_DRAWING.vhd(157) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "num_pix[1]" at LCD_DRAWING.vhd(157) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "num_pix[2]" at LCD_DRAWING.vhd(157) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "num_pix[3]" at LCD_DRAWING.vhd(157) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "num_pix[4]" at LCD_DRAWING.vhd(157) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "num_pix[5]" at LCD_DRAWING.vhd(157) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "num_pix[6]" at LCD_DRAWING.vhd(157) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "num_pix[7]" at LCD_DRAWING.vhd(157) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "num_pix[8]" at LCD_DRAWING.vhd(157) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "num_pix[9]" at LCD_DRAWING.vhd(157) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "num_pix[10]" at LCD_DRAWING.vhd(157) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "num_pix[11]" at LCD_DRAWING.vhd(157) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "num_pix[12]" at LCD_DRAWING.vhd(157) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "num_pix[13]" at LCD_DRAWING.vhd(157) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "num_pix[14]" at LCD_DRAWING.vhd(157) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "num_pix[15]" at LCD_DRAWING.vhd(157) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "num_pix[16]" at LCD_DRAWING.vhd(157) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 157
+Info (10041): Inferred latch for "color[0]" at LCD_DRAWING.vhd(146) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 146
+Info (10041): Inferred latch for "color[1]" at LCD_DRAWING.vhd(146) File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 146
+Info (12128): Elaborating entity "LCD_UART" for hierarchy "LCD_UART:DUT_LCD_UART" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 286
+Warning (10036): Verilog HDL or VHDL warning at LCD_UART.vhd(36): object "REGDPLZ_out" assigned a value but never read File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_UART.vhd Line: 36
 Info (276014): Found 1 instances of uninferred RAM logic
     Info (276004): RAM logic "LT24Setup:DUT_SETUP|LT24InitLCD:DUT_InitLCD|romsinc:DUT_ROM|rom" is uninferred due to inappropriate RAM size File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/romsinc.vhd Line: 16
 Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning (13039): The following bidirectional pins have no drivers
+    Warning (13040): bidirectional pin "GPIO_0[3]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[0]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[1]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[2]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[4]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[5]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[6]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[7]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[8]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[9]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[10]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[11]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[12]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[13]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[14]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[15]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[16]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[17]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[18]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[19]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[20]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[21]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[22]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[23]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[24]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[25]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[26]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[27]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[28]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[29]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[30]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[31]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[32]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[33]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[34]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "GPIO_0[35]" has no driver File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 48
 Info (13025): Duplicate LATCH primitives merged into single LATCH primitive
     Info (13026): Duplicate LATCH primitive "LCD_CTRL:DUT_LCD_Ctrl|rgbreg[4]" merged with LATCH primitive "LCD_CTRL:DUT_LCD_Ctrl|rgbreg[0]" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_CTRL.vhd Line: 164
     Info (13026): Duplicate LATCH primitive "LCD_CTRL:DUT_LCD_Ctrl|rgbreg[3]" merged with LATCH primitive "LCD_CTRL:DUT_LCD_Ctrl|rgbreg[0]" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_CTRL.vhd Line: 164
@@ -664,10 +732,10 @@ Info (13025): Duplicate LATCH primitives merged into single LATCH primitive
     Info (13026): Duplicate LATCH primitive "LCD_CTRL:DUT_LCD_Ctrl|rgbreg[14]" merged with LATCH primitive "LCD_CTRL:DUT_LCD_Ctrl|rgbreg[11]" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_CTRL.vhd Line: 164
     Info (13026): Duplicate LATCH primitive "LCD_CTRL:DUT_LCD_Ctrl|rgbreg[13]" merged with LATCH primitive "LCD_CTRL:DUT_LCD_Ctrl|rgbreg[11]" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_CTRL.vhd Line: 164
     Info (13026): Duplicate LATCH primitive "LCD_CTRL:DUT_LCD_Ctrl|rgbreg[12]" merged with LATCH primitive "LCD_CTRL:DUT_LCD_Ctrl|rgbreg[11]" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_CTRL.vhd Line: 164
-Warning (13012): Latch LCD_DRAWING:DUT_LCD_Drawing|color[0] has unsafe behavior File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 169
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal LCD_DRAWING:DUT_LCD_Drawing|WideOr9 File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 43
-Warning (13012): Latch LCD_DRAWING:DUT_LCD_Drawing|color[1] has unsafe behavior File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 169
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal LCD_DRAWING:DUT_LCD_Drawing|WideOr9 File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 43
+Warning (13012): Latch LCD_DRAWING:DUT_LCD_Drawing|color[0] has unsafe behavior File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 146
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LCD_DRAWING:DUT_LCD_Drawing|WideOr9 File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 44
+Warning (13012): Latch LCD_DRAWING:DUT_LCD_Drawing|color[1] has unsafe behavior File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 146
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal LCD_DRAWING:DUT_LCD_Drawing|WideOr9 File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/MODELSIM/LCD_DRAWING.vhd Line: 44
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "LEDR[0]" is stuck at GND File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 36
     Warning (13410): Pin "LEDR[1]" is stuck at GND File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 36
@@ -675,14 +743,16 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "LEDR[3]" is stuck at GND File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 36
     Warning (13410): Pin "LEDR[4]" is stuck at GND File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 36
     Warning (13410): Pin "LEDR[5]" is stuck at GND File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 36
-    Warning (13410): Pin "LEDR[6]" is stuck at GND File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 36
     Warning (13410): Pin "LT24_LCD_ON" is stuck at VCC File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 39
     Warning (13410): Pin "LT24_RD_N" is stuck at VCC File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 42
 Info (286030): Timing-Driven Synthesis is running
+Warning (14632): Output pin "LEDR[6]" driven by bidirectional pin "GPIO_0[3]" cannot be tri-stated File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 36
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 9 input pin(s) that do not drive logic
+Warning (21074): Design contains 11 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "KEY[1]" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 32
+    Warning (15610): No output dependent on input pin "KEY[2]" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 32
+    Warning (15610): No output dependent on input pin "KEY[3]" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 32
     Warning (15610): No output dependent on input pin "SW[2]" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 34
     Warning (15610): No output dependent on input pin "SW[3]" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 34
     Warning (15610): No output dependent on input pin "SW[4]" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 34
@@ -691,14 +761,15 @@ Warning (21074): Design contains 9 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "SW[7]" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 34
     Warning (15610): No output dependent on input pin "SW[8]" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 34
     Warning (15610): No output dependent on input pin "SW[9]" File: C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/de1soc_top.vhd Line: 34
-Info (21057): Implemented 380 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 458 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 15 input pins
     Info (21059): Implemented 32 output pins
-    Info (21061): Implemented 333 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 46 warnings
-    Info: Peak virtual memory: 4858 megabytes
-    Info: Processing ended: Sun Nov 07 22:35:03 2021
-    Info: Elapsed time: 00:00:27
-    Info: Total CPU time (on all processors): 00:00:46
+    Info (21060): Implemented 36 bidirectional pins
+    Info (21061): Implemented 375 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 86 warnings
+    Info: Peak virtual memory: 4855 megabytes
+    Info: Processing ended: Fri Dec 10 00:34:37 2021
+    Info: Elapsed time: 00:00:14
+    Info: Total CPU time (on all processors): 00:00:31
 
 

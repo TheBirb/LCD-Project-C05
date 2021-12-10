@@ -42,10 +42,10 @@ entity DE1SOC_TOP is
         LT24_RD_N       : out std_logic;
         LT24_RS         : out std_logic;
         LT24_WR_N       : out std_logic;
-        LT24_D          : out   std_logic_vector(15 downto 0)
+        LT24_D          : out   std_logic_vector(15 downto 0);
 
         -- GPIO ----------------
---      GPIO_0          : inout std_logic_vector(35 downto 0);
+        GPIO_0          : inout std_logic_vector(35 downto 0)
 --      GPIO_1          : inout std_logic_vector(35 downto 0)
 
         -- SEG7 ----------------
@@ -135,9 +135,21 @@ architecture rtl_0 of DE1SOC_TOP is
        -- OP DrawColour(RGB, NumPix)  from the current cursor position
        OP_DrawColour  : out std_logic;
        RGB            : out std_logic_vector (15 downto 0) ; 	
-       NumPix         : out std_logic_vector (16 downto 0)
+       NumPix         : out std_logic_vector (16 downto 0) ;
+		 Done_Drawing   : out std_logic
    );
    end component ;
+	
+	component LCD_UART
+	port (
+		clk          : IN  std_logic;
+      RxD 	       : IN  std_logic;
+      reset_l      : IN  std_logic;
+      DONE_DRAWING : IN  std_logic;
+      DEL_SCREEN : OUT  std_logic;
+      DRAW_DIAG : OUT  std_logic
+	);
+	end component ;
 
   
       constant BLACK_rgb : std_logic_vector (15 downto 0) := "0000000000000000";
@@ -168,10 +180,13 @@ architecture rtl_0 of DE1SOC_TOP is
    signal  NUMPIX              :  std_logic_vector(16 downto 0);
    signal  RGB                 :  std_logic_vector(15 downto 0);
    signal  Done_DrawColor      :  std_logic;
+	signal  Done_Drawing      :  std_logic;
+	signal  Del_Screen      :  std_logic;
+	signal  Draw_Diag      :  std_logic;
 --
    signal  LT24_Init_Done       : std_logic;   -- LT24_Init_Done
    signal  Test_LCD_Done        : std_logic;   -- Test_LCD_Done
-
+   signal  RX                   : std_logic;
 
 begin 
         --  Input PINs Asignements
@@ -179,6 +194,7 @@ begin
 
         reset_l <= KEY(0);
         reset   <= '1' when KEY(0)='0' else '0';
+		  Rx <= GPIO_0(3);
 
 
 -- Instaciacion de componentes--------------    
@@ -246,9 +262,9 @@ begin
       clk          => clk,
       reset_l      => reset_l,
        -- OP: Delete Screen Draw al Screen with black pixels 
-       Del_Screen          => not(KEY(2)),
+       Del_Screen          => Del_Screen,
        -- OP: Draw a Diagonal Line 
-       Draw_Diag           => not(KEY(3)),
+       Draw_Diag           => Draw_Diag,
        Colour              => SW(1 downto 0),
        -- Operation Finish (from Lcd_Control)
        Done_SetCursor              => Done_SetCursor,
@@ -260,8 +276,22 @@ begin
        -- OP DrawColour(RGB, NumPix)  from the current cursor position
        OP_DrawColour     => OP_DrawColour,
        RGB               => RGB,
-       NumPix            => NumPix
+       NumPix            => NumPix,
+		 -- Done of Drawing
+		 Done_Drawing      => Done_Drawing
    );
+	
+	LEDR(6)  <= not(Rx);
+	
+	DUT_LCD_UART:LCD_UART
+	  port map (
+		 clk  => clk,
+		 reset_l  => reset_l,
+       RxD 	       => Rx,
+       DONE_DRAWING => Done_Drawing,
+       DEL_SCREEN =>Del_Screen,
+       DRAW_DIAG => Draw_Diag
+	);
    
 
 

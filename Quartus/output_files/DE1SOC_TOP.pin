@@ -80,16 +80,16 @@ Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage 
 -------------------------------------------------------------------------------------------------------------
 GND                          : A2        : gnd    :                   :         :           :                
 RESERVED_INPUT               : A3        :        :                   :         : 8A        :                
-LEDR[0]                      : A4        : output : 2.5 V             :         : 8A        : N              
+RESERVED_INPUT               : A4        :        :                   :         : 8A        :                
 RESERVED_INPUT               : A5        :        :                   :         : 8A        :                
 RESERVED_INPUT               : A6        :        :                   :         : 8A        :                
 VCCIO8A                      : A7        : power  :                   : 2.5V    : 8A        :                
 RESERVED_INPUT               : A8        :        :                   :         : 8A        :                
 RESERVED_INPUT               : A9        :        :                   :         : 8A        :                
 RESERVED_INPUT               : A10       :        :                   :         : 8A        :                
-RESERVED_INPUT               : A11       :        :                   :         : 8A        :                
+SW[5]                        : A11       : input  : 2.5 V             :         : 8A        : N              
 GND                          : A12       : gnd    :                   :         :           :                
-LEDR[5]                      : A13       : output : 2.5 V             :         : 8A        : N              
+RESERVED_INPUT               : A13       :        :                   :         : 8A        :                
 RESERVED_INPUT               : A14       :        :                   :         : 7D        :                
 RESERVED_INPUT               : A15       :        :                   :         : 7D        :                
 RESERVED_INPUT               : A16       :        :                   :         : 7C        :                
@@ -123,8 +123,8 @@ KEY[0]                       : AA14      : input  : 3.3-V LVTTL       :         
 KEY[1]                       : AA15      : input  : 3.3-V LVTTL       :         : 3B        : Y              
 RESERVED_INPUT               : AA16      :        :                   :         : 4A        :                
 VCCIO4A                      : AA17      : power  :                   : 3.3V    : 4A        :                
-RESERVED_INPUT               : AA18      :        :                   :         : 4A        :                
-RESERVED_INPUT               : AA19      :        :                   :         : 4A        :                
+GPIO_0[16]                   : AA18      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[17]                   : AA19      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
 RESERVED_INPUT               : AA20      :        :                   :         : 4A        :                
 RESERVED_INPUT               : AA21      :        :                   :         : 4A        :                
 GND                          : AA22      : gnd    :                   :         :           :                
@@ -183,9 +183,9 @@ RESERVED_INPUT               : AC14      :        :                   :         
 VCCPD3B4A                    : AC15      : power  :                   : 3.3V    : 3B, 4A    :                
 GND                          : AC16      : gnd    :                   :         :           :                
 VCCPD3B4A                    : AC17      : power  :                   : 3.3V    : 3B, 4A    :                
-RESERVED_INPUT               : AC18      :        :                   :         : 4A        :                
+GPIO_0[0]                    : AC18      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
 VCCPD3B4A                    : AC19      : power  :                   : 3.3V    : 3B, 4A    :                
-RESERVED_INPUT               : AC20      :        :                   :         : 4A        :                
+GPIO_0[19]                   : AC20      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
 VCCIO4A                      : AC21      : power  :                   : 3.3V    : 4A        :                
 LT24_LCD_ON                  : AC22      : output : 3.3-V LVTTL       :         : 4A        : Y              
 RESERVED_INPUT               : AC23      :        :                   :         : 4A        :                
@@ -207,21 +207,21 @@ VCCIO3A                      : AD8       : power  :                   : 2.5V    
 RESERVED_INPUT               : AD9       :        :                   :         : 3A        :                
 SW[8]                        : AD10      : input  : 3.3-V LVTTL       :         : 3A        : Y              
 RESERVED_INPUT               : AD11      :        :                   :         : 3A        :                
-RESERVED_INPUT               : AD12      :        :                   :         : 3A        :                
+LEDR[5]                      : AD12      : output : 2.5 V             :         : 3A        : N              
 VCCIO3B                      : AD13      : power  :                   : 3.3V    : 3B        :                
 RESERVED_INPUT               : AD14      :        :                   :         : 3B        :                
 DNU                          : AD15      :        :                   :         :           :                
 VCCPD3B4A                    : AD16      : power  :                   : 3.3V    : 3B, 4A    :                
-RESERVED_INPUT               : AD17      :        :                   :         : 4A        :                
+GPIO_0[2]                    : AD17      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
 VCCIO4A                      : AD18      : power  :                   : 3.3V    : 4A        :                
-RESERVED_INPUT               : AD19      :        :                   :         : 4A        :                
-RESERVED_INPUT               : AD20      :        :                   :         : 4A        :                
+GPIO_0[24]                   : AD19      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[25]                   : AD20      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
 LT24_RESET_N                 : AD21      : output : 3.3-V LVTTL       :         : 4A        : Y              
 VCC_AUX                      : AD22      : power  :                   : 2.5V    :           :                
 GND                          : AD23      : gnd    :                   :         :           :                
 RESERVED_INPUT               : AD24      :        :                   :         : 4A        :                
 RESERVED_INPUT               : AD25      :        :                   :         : 5A        :                
-SW[5]                        : AD26      : input  : 2.5 V             :         : 5A        : N              
+RESERVED_INPUT               : AD26      :        :                   :         : 5A        :                
 RESERVED_INPUT               : AD27      :        :                   :         : 5A        :                
 VCCIO5A                      : AD28      : power  :                   : 3.3V    : 5A        :                
 RESERVED_INPUT               : AD29      :        :                   :         : 5B        :                
@@ -241,10 +241,10 @@ SW[9]                        : AE12      : input  : 3.3-V LVTTL       :         
 RESERVED_INPUT               : AE13      :        :                   :         : 3B        :                
 RESERVED_INPUT               : AE14      :        :                   :         : 3B        :                
 VCCIO3B                      : AE15      : power  :                   : 3.3V    : 3B        :                
-RESERVED_INPUT               : AE16      :        :                   :         : 4A        :                
-RESERVED_INPUT               : AE17      :        :                   :         : 4A        :                
-RESERVED_INPUT               : AE18      :        :                   :         : 4A        :                
-RESERVED_INPUT               : AE19      :        :                   :         : 4A        :                
+GPIO_0[13]                   : AE16      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[18]                   : AE17      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[26]                   : AE18      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[27]                   : AE19      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
 GND                          : AE20      : gnd    :                   :         :           :                
 VCCPD3B4A                    : AE21      : power  :                   : 3.3V    : 3B, 4A    :                
 RESERVED_INPUT               : AE22      :        :                   :         : 4A        :                
@@ -265,18 +265,18 @@ RESERVED_INPUT               : AF6       :        :                   :         
 VCCIO3A                      : AF7       : power  :                   : 2.5V    : 3A        :                
 RESERVED_INPUT               : AF8       :        :                   :         : 3A        :                
 RESERVED_INPUT               : AF9       :        :                   :         : 3A        :                
-RESERVED_INPUT               : AF10      :        :                   :         : 3A        :                
+LEDR[1]                      : AF10      : output : 2.5 V             :         : 3A        : N              
 RESERVED_INPUT               : AF11      :        :                   :         : 3B        :                
 GND                          : AF12      : gnd    :                   :         :           :                
 RESERVED_INPUT               : AF13      :        :                   :         : 3B        :                
 CLOCK_50                     : AF14      : input  : 3.3-V LVTTL       :         : 3B        : Y              
 RESERVED_INPUT               : AF15      :        :                   :         : 3B        :                
-RESERVED_INPUT               : AF16      :        :                   :         : 4A        :                
+GPIO_0[14]                   : AF16      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
 GND                          : AF17      : gnd    :                   :         :           :                
-RESERVED_INPUT               : AF18      :        :                   :         : 4A        :                
-RESERVED_INPUT               : AF19      :        :                   :         : 4A        :                
-RESERVED_INPUT               : AF20      :        :                   :         : 4A        :                
-SW[4]                        : AF21      : input  : 2.5 V             :         : 4A        : N              
+GPIO_0[32]                   : AF18      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[30]                   : AF19      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[28]                   : AF20      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[29]                   : AF21      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
 VCCIO4A                      : AF22      : power  :                   : 3.3V    : 4A        :                
 RESERVED_INPUT               : AF23      :        :                   :         : 4A        :                
 RESERVED_INPUT               : AF24      :        :                   :         : 4A        :                
@@ -288,7 +288,7 @@ RESERVED_INPUT               : AF29      :        :                   :         
 RESERVED_INPUT               : AF30      :        :                   :         : 5A        :                
 RESERVED_INPUT               : AG1       :        :                   :         : 3A        :                
 RESERVED_INPUT               : AG2       :        :                   :         : 3A        :                
-LEDR[1]                      : AG3       : output : 2.5 V             :         : 3A        : N              
+RESERVED_INPUT               : AG3       :        :                   :         : 3A        :                
 VCCIO3A                      : AG4       : power  :                   : 2.5V    : 3A        :                
 RESERVED_INPUT               : AG5       :        :                   :         : 3A        :                
 RESERVED_INPUT               : AG6       :        :                   :         : 3A        :                
@@ -301,18 +301,18 @@ RESERVED_INPUT               : AG12      :        :                   :         
 RESERVED_INPUT               : AG13      :        :                   :         : 3B        :                
 GND                          : AG14      : gnd    :                   :         :           :                
 RESERVED_INPUT               : AG15      :        :                   :         : 3B        :                
-RESERVED_INPUT               : AG16      :        :                   :         : 4A        :                
-RESERVED_INPUT               : AG17      :        :                   :         : 4A        :                
-RESERVED_INPUT               : AG18      :        :                   :         : 4A        :                
+GPIO_0[12]                   : AG16      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[15]                   : AG17      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[34]                   : AG18      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
 VCCIO4A                      : AG19      : power  :                   : 3.3V    : 4A        :                
-RESERVED_INPUT               : AG20      :        :                   :         : 4A        :                
-RESERVED_INPUT               : AG21      :        :                   :         : 4A        :                
+GPIO_0[33]                   : AG20      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[31]                   : AG21      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
 RESERVED_INPUT               : AG22      :        :                   :         : 4A        :                
 LT24_D[14]                   : AG23      : output : 3.3-V LVTTL       :         : 4A        : Y              
 GND                          : AG24      : gnd    :                   :         :           :                
 RESERVED_INPUT               : AG25      :        :                   :         : 4A        :                
 LT24_RD_N                    : AG26      : output : 3.3-V LVTTL       :         : 4A        : Y              
-SW[2]                        : AG27      : input  : 2.5 V             :         : 5A        : N              
+RESERVED_INPUT               : AG27      :        :                   :         : 5A        :                
 RESERVED_INPUT               : AG28      :        :                   :         : 5A        :                
 VCCIO5A                      : AG29      : power  :                   : 3.3V    : 5A        :                
 RESERVED_INPUT               : AG30      :        :                   :         : 5A        :                
@@ -332,10 +332,10 @@ RESERVED_INPUT               : AH13      :        :                   :         
 RESERVED_INPUT               : AH14      :        :                   :         : 3B        :                
 RESERVED_INPUT               : AH15      :        :                   :         : 3B        :                
 VCCIO4A                      : AH16      : power  :                   : 3.3V    : 4A        :                
-RESERVED_INPUT               : AH17      :        :                   :         : 4A        :                
-RESERVED_INPUT               : AH18      :        :                   :         : 4A        :                
-RESERVED_INPUT               : AH19      :        :                   :         : 4A        :                
-RESERVED_INPUT               : AH20      :        :                   :         : 4A        :                
+GPIO_0[11]                   : AH17      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[10]                   : AH18      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[20]                   : AH19      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[22]                   : AH20      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
 GND                          : AH21      : gnd    :                   :         :           :                
 RESERVED_INPUT               : AH22      :        :                   :         : 4A        :                
 LT24_CS_N                    : AH23      : output : 3.3-V LVTTL       :         : 4A        : Y              
@@ -361,12 +361,12 @@ RESERVED_INPUT               : AJ12      :        :                   :         
 VCCIO3B                      : AJ13      : power  :                   : 3.3V    : 3B        :                
 RESERVED_INPUT               : AJ14      :        :                   :         : 3B        :                
 VREFB3BN0                    : AJ15      : power  :                   :         : 3B        :                
-RESERVED_INPUT               : AJ16      :        :                   :         : 4A        :                
-RESERVED_INPUT               : AJ17      :        :                   :         : 4A        :                
+GPIO_0[9]                    : AJ16      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[8]                    : AJ17      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
 GND                          : AJ18      : gnd    :                   :         :           :                
-RESERVED_INPUT               : AJ19      :        :                   :         : 4A        :                
-RESERVED_INPUT               : AJ20      :        :                   :         : 4A        :                
-RESERVED_INPUT               : AJ21      :        :                   :         : 4A        :                
+GPIO_0[7]                    : AJ19      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[21]                   : AJ20      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[35]                   : AJ21      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
 RESERVED_INPUT               : AJ22      :        :                   :         : 4A        :                
 VCCIO4A                      : AJ23      : power  :                   : 3.3V    : 4A        :                
 LT24_D[12]                   : AJ24      : output : 3.3-V LVTTL       :         : 4A        : Y              
@@ -390,12 +390,12 @@ RESERVED_INPUT               : AK12      :        :                   :         
 RESERVED_INPUT               : AK13      :        :                   :         : 3B        :                
 RESERVED_INPUT               : AK14      :        :                   :         : 3B        :                
 GND                          : AK15      : gnd    :                   :         :           :                
-RESERVED_INPUT               : AK16      :        :                   :         : 4A        :                
+GPIO_0[4]                    : AK16      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
 VREFB4AN0                    : AK17      : power  :                   :         : 4A        :                
-RESERVED_INPUT               : AK18      :        :                   :         : 4A        :                
-RESERVED_INPUT               : AK19      :        :                   :         : 4A        :                
+GPIO_0[5]                    : AK18      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[6]                    : AK19      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
 VCCIO4A                      : AK20      : power  :                   : 3.3V    : 4A        :                
-RESERVED_INPUT               : AK21      :        :                   :         : 4A        :                
+GPIO_0[23]                   : AK21      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
 RESERVED_INPUT               : AK22      :        :                   :         : 4A        :                
 LT24_D[15]                   : AK23      : output : 3.3-V LVTTL       :         : 4A        : Y              
 LT24_D[13]                   : AK24      : output : 3.3-V LVTTL       :         : 4A        : Y              
@@ -411,7 +411,7 @@ VCCIO8A                      : B4        : power  :                   : 2.5V    
 RESERVED_INPUT               : B5        :        :                   :         : 8A        :                
 RESERVED_INPUT               : B6        :        :                   :         : 8A        :                
 RESERVED_INPUT               : B7        :        :                   :         : 8A        :                
-RESERVED_INPUT               : B8        :        :                   :         : 8A        :                
+SW[4]                        : B8        : input  : 2.5 V             :         : 8A        : N              
 GND                          : B9        : gnd    :                   :         :           :                
 VREFB8AN0                    : B10       : power  :                   :         : 8A        :                
 RESERVED_INPUT               : B11       :        :                   :         : 8A        :                
@@ -469,10 +469,10 @@ RESERVED_INPUT               : D2        :        :                   :         
 GND                          : D3        : gnd    :                   :         :           :                
 RESERVED_INPUT               : D4        :        :                   :         : 8A        :                
 RESERVED_INPUT               : D5        :        :                   :         : 8A        :                
-RESERVED_INPUT               : D6        :        :                   :         : 8A        :                
+LEDR[4]                      : D6        : output : 2.5 V             :         : 8A        : N              
 RESERVED_INPUT               : D7        :        :                   :         : 8A        :                
 VCCIO8A                      : D8        : power  :                   : 2.5V    : 8A        :                
-SW[3]                        : D9        : input  : 2.5 V             :         : 8A        : N              
+RESERVED_INPUT               : D9        :        :                   :         : 8A        :                
 RESERVED_INPUT               : D10       :        :                   :         : 8A        :                
 RESERVED_INPUT               : D11       :        :                   :         : 8A        :                
 RESERVED_INPUT               : D12       :        :                   :         : 8A        :                
@@ -505,7 +505,7 @@ RESERVED_INPUT               : E8        :        :                   :         
 RESERVED_INPUT               : E9        :        :                   :         : 8A        :                
 GND                          : E10       : gnd    :                   :         :           :                
 RESERVED_INPUT               : E11       :        :                   :         : 8A        :                
-RESERVED_INPUT               : E12       :        :                   :         : 8A        :                
+SW[2]                        : E12       : input  : 2.5 V             :         : 8A        : N              
 RESERVED_INPUT               : E13       :        :                   :         : 8A        :                
 RESERVED_INPUT               : E14       :        :                   :         : 7D        :                
 VCCIO7D_HPS                  : E15       : power  :                   : 2.5V    : 7D        :                
@@ -533,10 +533,10 @@ RESERVED_INPUT               : F6        :        :                   :         
 GND                          : F7        : gnd    :                   :         :           :                
 RESERVED_INPUT               : F8        :        :                   :         : 8A        :                
 RESERVED_INPUT               : F9        :        :                   :         : 8A        :                
-LEDR[4]                      : F10       : output : 2.5 V             :         : 8A        : N              
+RESERVED_INPUT               : F10       :        :                   :         : 8A        :                
 RESERVED_INPUT               : F11       :        :                   :         : 8A        :                
 VCCIO8A                      : F12       : power  :                   : 2.5V    : 8A        :                
-LEDR[6]                      : F13       : output : 2.5 V             :         : 8A        : N              
+RESERVED_INPUT               : F13       :        :                   :         : 8A        :                
 RESERVED_INPUT               : F14       :        :                   :         : 8A        :                
 RESERVED_INPUT               : F15       :        :                   :         : 8A        :                
 RESERVED_INPUT               : F16       :        :                   :         : 7D        :                
@@ -568,7 +568,7 @@ RESERVED_INPUT               : G11       :        :                   :         
 RESERVED_INPUT               : G12       :        :                   :         : 8A        :                
 RESERVED_INPUT               : G13       :        :                   :         : 8A        :                
 VCCIO8A                      : G14       : power  :                   : 2.5V    : 8A        :                
-RESERVED_INPUT               : G15       :        :                   :         : 8A        :                
+SW[3]                        : G15       : input  : 2.5 V             :         : 8A        : N              
 RESERVED_INPUT               : G16       :        :                   :         : 7D        :                
 RESERVED_INPUT               : G17       :        :                   :         : 7C        :                
 RESERVED_INPUT               : G18       :        :                   :         : 7C        :                
@@ -622,7 +622,7 @@ nCONFIG                      : J5        :        :                   :         
 GND                          : J6        :        :                   :         : 9A        :                
 RESERVED_INPUT               : J7        :        :                   :         : 8A        :                
 GND                          : J8        : gnd    :                   :         :           :                
-RESERVED_INPUT               : J9        :        :                   :         : 8A        :                
+LEDR[0]                      : J9        : output : 2.5 V             :         : 8A        : N              
 RESERVED_INPUT               : J10       :        :                   :         : 8A        :                
 VCCPGM                       : J11       : power  :                   : 1.8V/2.5V/3.0V/3.3V :           :                
 RESERVED_INPUT               : J12       :        :                   :         : 8A        :                
@@ -960,9 +960,9 @@ VCC                          : Y13       : power  :                   : 1.1V    
 GND                          : Y14       : gnd    :                   :         :           :                
 GND                          : Y15       : gnd    :                   :         :           :                
 KEY[3]                       : Y16       : input  : 3.3-V LVTTL       :         : 3B        : Y              
-RESERVED_INPUT               : Y17       :        :                   :         : 4A        :                
-RESERVED_INPUT               : Y18       :        :                   :         : 4A        :                
-RESERVED_INPUT               : Y19       :        :                   :         : 4A        :                
+GPIO_0[1]                    : Y17       : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GPIO_0[3]                    : Y18       : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+LEDR[6]                      : Y19       : output : 3.3-V LVTTL       :         : 4A        : Y              
 GND                          : Y20       : gnd    :                   :         :           :                
 LEDR[9]                      : Y21       : output : 3.3-V LVTTL       :         : 5A        : Y              
 VCCA_FPLL                    : Y22       : power  :                   : 2.5V    :           :                

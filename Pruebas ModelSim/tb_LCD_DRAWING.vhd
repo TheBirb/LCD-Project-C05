@@ -20,7 +20,8 @@ architecture a of tb_draw is
     YROW          : OUT std_logic_vector(8 DOWNTO 0);
     OP_DRAWCOLOUR : OUT std_logic;
     RGB           : OUT std_logic_vector(15 DOWNTO 0);
-    NUMPIX       : OUT std_logic_vector(16 DOWNTO 0)
+    NUMPIX        : OUT std_logic_vector(16 DOWNTO 0);
+    DONE_DRAWING  : OUT std_logic
 	  ); 
   end component ; 
 -- *** y declarar como señales internas todas las señales del port()
@@ -39,6 +40,7 @@ architecture a of tb_draw is
   signal tb_op_drawcolour: std_logic:='0';
   signal tb_rgb : std_logic_vector (15 downto 0);
   signal tb_num_pix : std_logic_vector (16 downto 0);
+  signal tb_done_drawing : std_logic :='0';
 
 --	...
 --	...
@@ -60,7 +62,8 @@ begin
     YROW => tb_yrow,
     OP_DRAWCOLOUR => tb_op_drawcolour,
     RGB => tb_rgb,
-    NUMPIX => tb_num_pix
+    NUMPIX => tb_num_pix,
+    DONE_DRAWING => tb_done_drawing
     );
 
   -- definicion del reloj
