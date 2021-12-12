@@ -14,7 +14,7 @@ ENTITY LCD_UART IS
 END LCD_UART;
 
 ARCHITECTURE arch1 of LCD_UART is
-	TYPE ESTADO IS (Inicio,EsperaComando,RecibirDat,ProcesarDato,EnviarBorrado,EnviarDiagonal,Fin,ResetDeDatos,TiempoRxD,TiempoDat);
+	TYPE ESTADO IS (Inicio,EsperaComando,RecibirDat,ProcesarDato,EnviarBorrado,EnviarDiagonal,Fin,Fin_NC,ResetDeDatos,TiempoRxD,TiempoDat);
   SIGNAL estado_q,estado_d : ESTADO;
 --CONTADOR DE DATOS UART
 	SIGNAL FIN_CONT : std_logic;
@@ -52,7 +52,7 @@ BEGIN
                           elsif COMPQ='1' then
                             	estado_d<=EnviarDiagonal;
                           else
-                            	estado_d<=EsperaComando;
+                            	estado_d<=FIN_NC;
                           end if;
       when EnviarBorrado =>estado_d<=ResetDeDatos;
       when EnviarDiagonal =>estado_d<=ResetDeDatos;
@@ -64,7 +64,7 @@ BEGIN
 			end if;
       when TiempoDat => if FIN_CICLO='1' and FIN_CONT='1' then
 				estado_d<=ProcesarDato;
-			elsif FIN_CICLO='1' then
+			elsif FIN_CICLO='1' and FIN_CONT='0' then
 				estado_d<=RecibirDat;
 			else
 				estado_d<=TiempoDat;
@@ -74,6 +74,7 @@ BEGIN
     		 else
                   	estado_d<=Fin;
                  end if;
+	  when FIN_NC => estado_d<=EsperaComando;
       when others => estado_d<=EsperaComando;
     end case;
  	end process;
@@ -97,12 +98,11 @@ BEGIN
 --SeÃ±ales del contador de datos
   RESET_cont <= '1' when (estado_q=ResetDeDatos) else '0';
   EN_CONT <= '1' when (estado_q=RecibirDat) else '0';
---SeÃ±ales de contador de tiempo
-  RESET_CONT_TIME <= '1' when (estado_q=RecibirDat or estado_d=ResetDeDatos) else '0';
-  EN_CONT_TIME <= '1' when (estado_q=TiempoRxD or estado_d=TiempoDat) else '0';
-  FIN_CICLO <= '1' when (contime="1110010001101") else '0';
-  FIN_TIME <= '1' when (contime="1111111111111") else '0';
-  
+--Señales de contador de tiempo
+  RESET_CONT_TIME <= '1' when (estado_q=RecibirDat or estado_q=ResetDeDatos or estado_q=FIN_NC) else '0';
+  EN_CONT_TIME <= '1' when (estado_q=TiempoRxD or estado_q=TiempoDat) else '0';
+  FIN_CICLO <= '1' when (contime="1010001011001") else '0';
+  FIN_TIME <= '1' when (contime="1111010100011") else '0';
 --registro de estados
       process(clk, reset_l)
       begin
