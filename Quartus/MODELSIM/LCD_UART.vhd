@@ -20,7 +20,7 @@ ARCHITECTURE arch1 of LCD_UART is
 	SIGNAL FIN_CONT : std_logic;
 	SIGNAL RESET_CONT : std_logic;
 	SIGNAL EN_CONT : std_logic;
-	SIGNAL contd : unsigned(2 downto 0);
+	SIGNAL contd : unsigned(3 downto 0);
 --CONTADOR DE DATOS UART
 	SIGNAL FIN_TIME : std_logic;
 	SIGNAL FIN_CICLO : std_logic;
@@ -87,7 +87,7 @@ BEGIN
 --comparador de comando DRAW_DIAG
   COMPQ <= '1' when content="01110001" else '0';
 --seÃ±al de final del contador
-  FIN_CONT <= '1' when contd="111" else '0';
+  FIN_CONT <= '1' when contd="1000" else '0';
 --seÃ±al de borrado de pantalla
   DEL_SCREEN <= '1' when (estado_q=EnviarBorrado) else '0';
 --seÃ±al de dibujado de diagonal
@@ -96,7 +96,7 @@ BEGIN
   REGDPLZ_out <= content;
   EN_DESPLZ_DER <= '1' when (estado_q=RecibirDat) else '0';
 --SeÃ±ales del contador de datos
-  RESET_cont <= '1' when (estado_q=ResetDeDatos) else '0';
+  RESET_CONT <= '1' when (estado_q=ResetDeDatos) else '0';
   EN_CONT <= '1' when (estado_q=RecibirDat) else '0';
 --Señales de contador de tiempo
   RESET_CONT_TIME <= '1' when (estado_q=RecibirDat or estado_q=ResetDeDatos or estado_q=FIN_NC) else '0';
