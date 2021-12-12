@@ -6,7 +6,7 @@ JedecChain;
 	P ActionCode(Ign)
 		Device PartName(SOCVHPS) MfrSpec(OpMask(0));
 	P ActionCode(Cfg)
-		Device PartName(5CSEMA5F31) Path("C:/UNI/3º/1º Cuatri/DCSD/Proyecto Final/LCD-Project-C05/Quartus/output_files/") File("DE1SOC_TOP.sof") MfrSpec(OpMask(1));
+		Device PartName(5CSEMA5F31) Path("C:/Users/mmjon/OneDrive/Documentos/GitHub/LCD-Project-C05/Quartus/output_files/") File("DE1SOC_TOP.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

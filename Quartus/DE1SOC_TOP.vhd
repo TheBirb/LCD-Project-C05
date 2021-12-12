@@ -186,7 +186,7 @@ architecture rtl_0 of DE1SOC_TOP is
 --
    signal  LT24_Init_Done       : std_logic;   -- LT24_Init_Done
    signal  Test_LCD_Done        : std_logic;   -- Test_LCD_Done
-   signal  RX                   : std_logic;
+   signal  Rx                   : std_logic;
 
 begin 
         --  Input PINs Asignements
@@ -194,7 +194,8 @@ begin
 
         reset_l <= KEY(0);
         reset   <= '1' when KEY(0)='0' else '0';
-		  Rx <= GPIO_0(3);
+		  Rx <= GPIO_0(5);
+		 
 
 
 -- Instaciacion de componentes--------------    
@@ -222,7 +223,7 @@ begin
       LT24_Init_Done      => LT24_Init_Done
  );
    LEDR(9)  <= LT24_Init_Done;
- 
+	LEDR(3)  <=  Done_Drawing;
 
   DUT_LCD_Ctrl:LCD_Ctrl  
     port map (
