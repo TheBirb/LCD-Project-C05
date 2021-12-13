@@ -135,17 +135,21 @@ LCD_DATA<="0000000000101010" when (sel_data="000")
    begin
   if reset_l='0' then
     x <= (others => '0');
-  elsif LD_X='1' then
-    x <= XCOL;
-  end if;
+	elsif clk'event AND  clk='1' then
+		if LD_X='1' then
+			x <= XCOL;
+		end if;
+	end if;
    end process;
    PROCESS (clk, reset_l, YROW)
    begin
   if reset_l='0' then
     y <= (others => '0');
-  elsif LD_Y='1' then
-    y <= YROW;
-  end if;
+	elsif clk'event AND  clk='1' then
+		if LD_Y='1' then
+			y <= YROW;
+		end if;
+	end if;
    end process;
 --contadorCiclos                                                                   
    PROCESS (clk, reset_l)
@@ -156,7 +160,7 @@ LCD_DATA<="0000000000101010" when (sel_data="000")
        IF ENABLE_CONT_DATA='1' THEN
          sel_data <= sel_data + 1;
        ELSIF LD_CONT_DATA='1' THEN
-   sel_data <= LD_VALUE_CONT_DATA;
+			sel_data <= LD_VALUE_CONT_DATA;
        END IF;
      END IF;
    END PROCESS;
@@ -165,17 +169,21 @@ LCD_DATA<="0000000000101010" when (sel_data="000")
    begin
   if reset_l='0' then
     rgbreg <= (others => '0');
-  elsif LD_RGB='1' then
-    rgbreg <= RGB;
-  end if;
+	elsif clk'event AND  clk='1' then
+		if LD_RGB='1' then
+			rgbreg <= RGB;
+		end if;
+	end if;
    end process;
    PROCESS (clk, reset_l, NUMPIX)
    begin
   if reset_l='0' then
     num_pix <= (others => '0');
-  elsif LD_NUMPIX='1' then
-    num_pix <= NUMPIX;
-  end if;
+	elsif clk'event AND  clk='1' then
+		if LD_NUMPIX='1' then
+			num_pix <= NUMPIX;
+		end if;
+	end if;
    end process;
 --contadorPixeles
    process (clk, reset_l)
