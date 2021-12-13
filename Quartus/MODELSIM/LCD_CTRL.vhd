@@ -191,10 +191,10 @@ LCD_DATA<="0000000000101010" when (sel_data="000")
   if reset_l = '0' then
     cntrgb <= (others => '0');
   elsif clk'event AND  clk='1' then
-    if EN_CONT_PIX='1' then
-      cntrgb <= cntrgb -1;
-    elsif LD_CONT_PIX='1' then
-      cntrgb <= num_pix;
+    if LD_CONT_PIX='1' then
+      cntrgb <= NUMPIX;
+    elsif EN_CONT_PIX='1' then
+		cntrgb <= cntrgb -1;
     end if;
   end if;
    end process;
