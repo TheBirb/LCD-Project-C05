@@ -23,7 +23,7 @@ ENTITY LCD_BASICA IS
 END LCD_BASICA;
 
 ARCHITECTURE arch1 OF LCD_BASICA IS
-   TYPE ESTADO IS (Inicio,Inicializar,Posicionar,Dibujar,DoneDrawing,EsperaCom,CargarComando,XIzF,XIzN,XDrF,XDrN,YAbF,YAbN,YArF,YArN);
+   TYPE ESTADO IS (Inicio,Inicializar,Posicionar,Dibujar,DoneDrawing,EsperaCom,CargarComando,XIzF,XIzN,XDrF,XDrN,YAbF,YAbN,YArF,YArN,Esp1);
    SIGNAL estado_q, estado_d: ESTADO;
 --Registro de X
    SIGNAL pos_x    : unsigned(7 DOWNTO 0);
@@ -81,14 +81,15 @@ BEGIN
                          elsif DIRECCION="11" then
                              estado_d<=YArN;
                          end if;
-   when XIzF=> estado_d<=Posicionar;
-   when XIzN=> estado_d<=Posicionar;
-   when XDrF=> estado_d<=Posicionar;
-   when XDrN=> estado_d<=Posicionar;
-   when YAbF=> estado_d<=Posicionar;
-   when YAbN=> estado_d<=Posicionar;
-   when YArF=> estado_d<=Posicionar;
-   when YArN=> estado_d<=Posicionar;
+   when XIzF=> estado_d<=Esp1;
+   when XIzN=> estado_d<=Esp1;
+   when XDrF=> estado_d<=Esp1;
+   when XDrN=> estado_d<=Esp1;
+   when YAbF=> estado_d<=Esp1;
+   when YAbN=> estado_d<=Esp1;
+   when YArF=> estado_d<=Esp1;
+   when YArN=> estado_d<=Esp1;
+   when Esp1=> estado_d<=Posicionar;
    when others => estado_d<=Inicio;
   end case;
   end process; 
