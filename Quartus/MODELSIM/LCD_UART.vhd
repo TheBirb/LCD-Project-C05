@@ -4,17 +4,21 @@ USE IEEE.NUMERIC_STD.all;
 
 ENTITY LCD_UART IS
   PORT (
-    clk          : IN  std_logic;
-    RxD 	 : IN  std_logic;
-    reset_l: IN  std_logic;
-    DONE_DRAWING : IN  std_logic;
-    DEL_SCREEN : OUT  std_logic;
-    DRAW_DIAG : OUT  std_logic
+    clk          : IN   std_logic;
+    RxD 	 : IN   std_logic;
+    reset_l      : IN   std_logic;
+    DONE_DRAWING : IN   std_logic;
+    DEL_SCREEN   : OUT  std_logic;
+    DRAW_DIAG    : OUT  std_logic;
+    FUN_BASICA   : OUT  std_logic;
+    MOVE         : OUT  std_logic;
+    FIN_FUN      : OUT  std_logic;
+    POSICION     : OUT  std_logic_vector(1 DOWNTO 0) 
   );
 END LCD_UART;
 
 ARCHITECTURE arch1 of LCD_UART is
-	TYPE ESTADO IS (Inicio,EsperaComando,RecibirDat,ProcesarDato,EnviarBorrado,EnviarDiagonal,Fin,Fin_NC,ResetDeDatos,TiempoRxD,TiempoDat);
+	TYPE ESTADO IS (Inicio,EsperaComando,RecibirDat,ProcesarDato,EnviarBorrado,EnviarDiagonal,EnviarBasica,Arriba,Izquierda,Abajo,Derecha,Mover,FinFuncion,Fin,Fin_NC,ResetDeDatos,TiempoRxD,TiempoDat);
   SIGNAL estado_q,estado_d : ESTADO;
 --CONTADOR DE DATOS UART
 	SIGNAL FIN_CONT : std_logic;
@@ -31,13 +35,25 @@ ARCHITECTURE arch1 of LCD_UART is
 	SIGNAL Rxd_in : std_logic;
 	SIGNAL COMPE : std_logic;
 	SIGNAL COMPQ : std_logic;
+	SIGNAL COMPB : std_logic;
+	SIGNAL COMPW : std_logic;
+	SIGNAL COMPA : std_logic;
+	SIGNAL COMPS : std_logic;
+	SIGNAL COMPD : std_logic;
+	SIGNAL COMPF : std_logic;
 --REGISTRO DE DESPLAZAMIENTO
 	SIGNAL EN_DESPLZ_DER : std_logic;
 	SIGNAL REGDPLZ_out : std_logic_vector(7 downto 0);
         SIGNAL content     : std_logic_vector(7 downto 0);
+--REGISTRO DE DIRECCION
+	SIGNAL LD_POS_W   : std_logic;
+	SIGNAL LD_POS_A   : std_logic;
+	SIGNAL LD_POS_S   : std_logic;
+	SIGNAL LD_POS_D   : std_logic;
+	SIGNAL direccion  : std_logic_vector(1 downto 0);
 
 BEGIN
-  process (estado_q, estado_d,Rxd_in,FIN_CONT,COMPE,COMPQ,DONE_DRAWING,FIN_TIME,FIN_CICLO)
+  process (estado_q, estado_d,Rxd_in,FIN_CONT,COMPE,COMPQ,COMPB,COMPW,COMPA,COMPS,COMPD,COMPF,DONE_DRAWING,FIN_TIME,FIN_CICLO)
   begin
     case estado_q is
       when Inicio => estado_d<=EsperaComando;
@@ -51,11 +67,30 @@ BEGIN
         			estado_d<=EnviarBorrado;
                           elsif COMPQ='1' then
                             	estado_d<=EnviarDiagonal;
+                          elsif COMPB='1' then
+                            	estado_d<=EnviarBasica;
+                          elsif COMPW='1' then
+                            	estado_d<=Arriba;
+                          elsif COMPA='1' then
+                            	estado_d<=Izquierda;
+                          elsif COMPS='1' then
+                            	estado_d<=Abajo;
+                          elsif COMPD='1' then
+                            	estado_d<=Derecha;
+                          elsif COMPF='1' then
+                            	estado_d<=FinFuncion;
                           else
                             	estado_d<=FIN_NC;
                           end if;
       when EnviarBorrado =>estado_d<=ResetDeDatos;
       when EnviarDiagonal =>estado_d<=ResetDeDatos;
+      when EnviarBasica   =>estado_d<=ResetDeDatos;
+      when Arriba =>estado_d<=Mover;
+      when Izquierda =>estado_d<=Mover;
+      when Abajo =>estado_d<=Mover;
+      when Derecha =>estado_d<=Mover;
+      when Mover =>estado_d<=ResetDeDatos;
+      when FinFuncion =>estado_d<=ResetDeDatos;
       when ResetDeDatos => estado_d<=Fin;
       when TiempoRxD => if FIN_TIME='1' then
 				estado_d<=RecibirDat;
@@ -86,12 +121,30 @@ BEGIN
   COMPE <= '1' when content="01100101" else '0';
 --comparador de comando DRAW_DIAG
   COMPQ <= '1' when content="01110001" else '0';
+--comparador de comando DEL_SCREEN
+  COMPB <= '1' when content="01100010" else '0';
+--comparador de comando DRAW_DIAG
+  COMPW <= '1' when content="01110111" else '0';
+--comparador de comando DEL_SCREEN
+  COMPA <= '1' when content="01100001" else '0';
+--comparador de comando DRAW_DIAG
+  COMPS <= '1' when content="01110011" else '0';
+--comparador de comando DEL_SCREEN
+  COMPD <= '1' when content="01100100" else '0';
+--comparador de comando DRAW_DIAG
+  COMPF <= '1' when content="01100110" else '0';
 --seÃ±al de final del contador
   FIN_CONT <= '1' when contd="1000" else '0';
 --seÃ±al de borrado de pantalla
   DEL_SCREEN <= '1' when (estado_q=EnviarBorrado) else '0';
 --seÃ±al de dibujado de diagonal
   DRAW_DIAG <= '1' when (estado_q=EnviarDiagonal) else '0'; 
+--seÃ±al de dibujado de diagonal
+  FUN_BASICA <= '1' when (estado_q=EnviarBasica) else '0'; 
+--seÃ±al de dibujado de diagonal
+  MOVE <= '1' when (estado_q=Mover) else '0'; 
+--seÃ±al de dibujado de diagonal
+  FIN_FUN <= '1' when (estado_q=FinFuncion) else '0'; 
 --seÃ±al de salida del registro desplazador      
   REGDPLZ_out <= content;
   EN_DESPLZ_DER <= '1' when (estado_q=RecibirDat) else '0';
@@ -103,6 +156,12 @@ BEGIN
   EN_CONT_TIME <= '1' when (estado_q=TiempoRxD or estado_q=TiempoDat) else '0';
   FIN_CICLO <= '1' when (contime="1010001011001") else '0';
   FIN_TIME <= '1' when (contime="1111010100011") else '0';
+--Se�ales de Registro Direccion
+  LD_POS_W <= '1' when (estado_q=Arriba) else '0';
+  LD_POS_A <= '1' when (estado_q=Izquierda) else '0';
+  LD_POS_S <= '1' when (estado_q=Abajo) else '0';
+  LD_POS_D <= '1' when (estado_q=Derecha) else '0';
+  POSICION <= std_logic_vector(direccion);
 --registro de estados
       process(clk, reset_l)
       begin
@@ -149,5 +208,22 @@ BEGIN
  	  end if;
         end if;
 	end process;
+--regsitro de POSICION (Registro de desplazamiento derecha)
+      process(clk, reset_l)
+      begin
+        if reset_l='0' then
+          direccion<="00";
+        elsif (clk'event and clk='1') then
+          if LD_POS_W='1' then
+            direccion <= "11";
+          elsif LD_POS_A='1' then
+            direccion <= "00";
+          elsif LD_POS_S='1' then
+            direccion <= "10";
+          elsif LD_POS_D='1' then
+            direccion <= "01";
+          end if;
+        end if;
+      end process;
 end arch1;
           
