@@ -146,10 +146,34 @@ architecture rtl_0 of DE1SOC_TOP is
       RxD 	       : IN  std_logic;
       reset_l      : IN  std_logic;
       DONE_DRAWING : IN  std_logic;
-      DEL_SCREEN : OUT  std_logic;
-      DRAW_DIAG : OUT  std_logic
+      DEL_SCREEN 	 : OUT  std_logic;
+      DRAW_DIAG 	 : OUT  std_logic;
+		FUN_BASICA   : OUT  std_logic;
+		FIN_FUN      : OUT  std_logic;
+		MOVE         : OUT  std_logic;
+		POSICION     : OUT  std_logic_vector(1 DOWNTO 0) 
 	);
 	end component ;
+	
+	component LCD_BASICA
+	port (
+    clk           : IN std_logic; 
+    reset_l       : IN std_logic;
+    FUN_BASICA    : IN std_logic;
+    MOVE          : IN std_logic;
+    FIN           : IN std_logic;
+    DIRECCION     : IN  std_logic_vector(1 DOWNTO 0);
+    COLOR_CODE    : IN  std_logic_vector(1 DOWNTO 0);
+    DEL_SCREEN    : OUT std_logic;
+    OP_SETCURSOR  : OUT std_logic;
+    XCOL          : OUT std_logic_vector(7 DOWNTO 0);
+    YROW          : OUT std_logic_vector(8 DOWNTO 0);
+    OP_DRAWCOLOUR : OUT std_logic;
+    RGB           : OUT std_logic_vector(15 DOWNTO 0);
+    NUM_PIX       : OUT std_logic_vector(16 DOWNTO 0);
+    DONE_DRAWING  : OUT std_logic
+	);
+	end component;
 
   
       constant BLACK_rgb : std_logic_vector (15 downto 0) := "0000000000000000";
@@ -168,25 +192,49 @@ architecture rtl_0 of DE1SOC_TOP is
    signal  LT24_RD_N_Int        :  std_logic;
    signal  LT24_D_Int           :  std_logic_vector(15 downto 0);
 
-   signal  OP_SetCursor        :  std_logic;   -- LT24_Init_Done
+   signal  OP_SetCursor_A      :  std_logic;   -- LT24_Init_Done
    signal  OP_SetCursor_Sinc   :  std_logic;   -- LT24_Init_Done
-   signal  XCol                 :  std_logic_vector(7 downto 0);
-   signal  YRow                 :  std_logic_vector(8 downto 0);
+   signal  XCol_A               :  std_logic_vector(7 downto 0);
+   signal  YRow_A               :  std_logic_vector(8 downto 0);
    signal  Done_SetCursor      :  std_logic;
  
-   signal  OP_DrawColour       :  std_logic;   -- OP_DrawColour
+   signal  OP_DrawColour_A       :  std_logic;   -- OP_DrawColour
    signal  OP_DrawColour_Sinc  :  std_logic;   -- OP_DrawColour
    signal  OP_DrawColour_sinc_one  :  std_logic;   -- OP_DrawColour one shot
-   signal  NUMPIX              :  std_logic_vector(16 downto 0);
-   signal  RGB                 :  std_logic_vector(15 downto 0);
+   signal  NUMPIX_A            :  std_logic_vector(16 downto 0);
+   signal  RGB_A               :  std_logic_vector(15 downto 0);
    signal  Done_DrawColor      :  std_logic;
-	signal  Done_Drawing      :  std_logic;
-	signal  Del_Screen      :  std_logic;
-	signal  Draw_Diag      :  std_logic;
---
+	signal  Done_Drawing_A      :  std_logic;
+	signal  Del_Screen_A        :  std_logic;
+	signal  Draw_Diag           :  std_logic;
+
    signal  LT24_Init_Done       : std_logic;   -- LT24_Init_Done
    signal  Test_LCD_Done        : std_logic;   -- Test_LCD_Done
    signal  Rx                   : std_logic;
+	
+	signal  Direccion            : std_logic_vector(1 downto 0);
+	signal  Move                 : std_logic;
+	signal  Fin_Fun              : std_logic;
+	signal  Fun_Basica           : std_logic;
+	signal  OP_SetCursor_B       :  std_logic;
+   signal  XCol_B               :  std_logic_vector(7 downto 0);
+   signal  YRow_B               :  std_logic_vector(8 downto 0);
+   signal  OP_DrawColour_B     :  std_logic;   -- OP_DrawColour
+   signal  NUMPIX_B            :  std_logic_vector(16 downto 0);
+   signal  RGB_B               :  std_logic_vector(15 downto 0);
+   signal  Done_Drawing_B      :  std_logic;	
+	signal  Del_Screen_B        :  std_logic;
+	
+	signal  OP_SetCursor        :  std_logic;
+   signal  XCol                :  std_logic_vector(7 downto 0);
+   signal  YRow                :  std_logic_vector(8 downto 0);
+   signal  OP_DrawColour       :  std_logic;   -- OP_DrawColour
+   signal  NUMPIX              :  std_logic_vector(16 downto 0);
+   signal  RGB                 :  std_logic_vector(15 downto 0);
+   signal  Done_Drawing        :  std_logic;	
+	signal  Del_Screen          :  std_logic;
+	
+	signal  set_fun              : std_logic;
 
 begin 
         --  Input PINs Asignements
@@ -195,8 +243,30 @@ begin
         reset_l <= KEY(0);
         reset   <= '1' when KEY(0)='0' else '0';
 		  Rx <= GPIO_0(5);
+		  
+		  --Registro señal del Multiplexor
+		   PROCESS (clk,reset_l)
+			begin
+				if reset_l='0' then
+					set_fun<='0';
+			elsif (clk'event and clk='1') then
+				if FUN_BASICA='1' then
+					set_fun<='1';
+				elsif FIN_FUN='1' then
+				   set_fun<='0';
+				end if;
+			end if;
+			end process;
 		 
-
+			--Multiplexores de entrada
+			OP_SetCursor  <= OP_SetCursor_A when (set_fun='0')  else OP_SetCursor_B;
+         XCol          <= XCol_A when (set_fun='0')  else XCol_B;
+         YRow          <= YRow_A when (set_fun='0')  else YRow_B;
+         OP_DrawColour <= OP_DrawColour_A when (set_fun='0')  else OP_DrawColour_B;
+         NUMPIX        <= NUMPIX_A when (set_fun='0')  else NUMPIX_B;
+         RGB           <= RGB_A when (set_fun='0')  else RGB_B;
+         Done_Drawing  <= Done_Drawing_A when (set_fun='0')  else Done_Drawing_B;	
+	      Del_Screen    <= Del_Screen_A when (set_fun='0')  else Del_Screen_B;
 
 -- Instaciacion de componentes--------------    
 
@@ -263,7 +333,7 @@ begin
       clk          => clk,
       reset_l      => reset_l,
        -- OP: Delete Screen Draw al Screen with black pixels 
-       Del_Screen          => Del_Screen,
+       Del_Screen          => Del_Screen_A,
        -- OP: Draw a Diagonal Line 
        Draw_Diag           => Draw_Diag,
        Colour              => SW(1 downto 0),
@@ -271,27 +341,50 @@ begin
        Done_SetCursor              => Done_SetCursor,
        Done_DrawColor              => Done_DrawColor,
        -- OP SetCursor(XCol, YRow)   Change Cursor position  (On reset 0,0)
-       OP_SetCursor             => OP_SetCursor,
-       XCol                     => XCol,
-       YRow                     => YRow,
+       OP_SetCursor             => OP_SetCursor_A,
+       XCol                     => XCol_A,
+       YRow                     => YRow_A,
        -- OP DrawColour(RGB, NumPix)  from the current cursor position
-       OP_DrawColour     => OP_DrawColour,
-       RGB               => RGB,
-       NumPix            => NumPix,
+       OP_DrawColour     => OP_DrawColour_A,
+       RGB               => RGB_A,
+       NumPix            => NumPix_A,
 		 -- Done of Drawing
-		 Done_Drawing      => Done_Drawing
+		 Done_Drawing      => Done_Drawing_A
    );
 	
 	LEDR(6)  <= not(Rx);
 	
 	DUT_LCD_UART:LCD_UART
 	  port map (
-		 clk  => clk,
-		 reset_l  => reset_l,
-       RxD 	       => Rx,
+		 clk  		  => clk,
+		 reset_l      => reset_l,
+       RxD 	        => Rx,
        DONE_DRAWING => Done_Drawing,
-       DEL_SCREEN =>Del_Screen,
-       DRAW_DIAG => Draw_Diag
+       DEL_SCREEN   => Del_Screen,
+       DRAW_DIAG    => Draw_Diag,
+		 FUN_BASICA   => Fun_Basica,
+		 FIN_FUN      => Fin_Fun,
+		 MOVE         => Move,    
+		 POSICION     => Direccion
+	);
+	
+	DUT_LCD_BASICA:LCD_BASICA
+	  port map (
+		 clk           => clk,
+		 reset_l       => reset_l,
+		 FUN_BASICA    => Fun_Basica,
+		 MOVE          => Move,
+		 FIN           => Fin_Fun,
+		 DIRECCION     => Direccion,
+		 COLOR_CODE    => SW(1 downto 0),
+		 DEL_SCREEN    => Del_Screen_B,
+		 OP_SETCURSOR  => OP_SetCursor_B,
+		 XCOL          => XCol_B,
+		 YROW          => YRow_B,
+		 OP_DRAWCOLOUR => OP_DrawColour_B,
+		 RGB           => RGB_B,
+		 NUM_PIX       => NumPix_B,
+		 DONE_DRAWING  => Done_Drawing_B
 	);
    
 
