@@ -31,7 +31,7 @@ ARCHITECTURE arch1 of LCD_UART is
 	SIGNAL RESET_CONT_TIME : std_logic;
 	SIGNAL EN_CONT_TIME : std_logic;
 	SIGNAL contime : unsigned(12 downto 0);
---SEÃALES DE COMPARADORES
+--SEÃƒÂ‘ALES DE COMPARADORES
 	SIGNAL Rxd_in : std_logic;
 	SIGNAL COMPE : std_logic;
 	SIGNAL COMPQ : std_logic;
@@ -133,30 +133,30 @@ BEGIN
   COMPD <= '1' when content="01100100" else '0';
 --comparador de comando DRAW_DIAG
   COMPF <= '1' when content="01100110" else '0';
---seÃ±al de final del contador
+--seÃƒÂ±al de final del contador
   FIN_CONT <= '1' when contd="1000" else '0';
---seÃ±al de borrado de pantalla
+--seÃƒÂ±al de borrado de pantalla
   DEL_SCREEN <= '1' when (estado_q=EnviarBorrado) else '0';
---seÃ±al de dibujado de diagonal
+--seÃƒÂ±al de dibujado de diagonal
   DRAW_DIAG <= '1' when (estado_q=EnviarDiagonal) else '0'; 
---seÃ±al de dibujado de diagonal
+--seÃƒÂ±al de dibujado de diagonal
   FUN_BASICA <= '1' when (estado_q=EnviarBasica) else '0'; 
---seÃ±al de dibujado de diagonal
+--seÃƒÂ±al de dibujado de diagonal
   MOVE <= '1' when (estado_q=Mover) else '0'; 
---seÃ±al de dibujado de diagonal
+--seÃƒÂ±al de dibujado de diagonal
   FIN_FUN <= '1' when (estado_q=FinFuncion) else '0'; 
---seÃ±al de salida del registro desplazador      
+--seÃƒÂ±al de salida del registro desplazador      
   REGDPLZ_out <= content;
   EN_DESPLZ_DER <= '1' when (estado_q=RecibirDat) else '0';
---SeÃ±ales del contador de datos
-  RESET_CONT <= '1' when (estado_q=ResetDeDatos) else '0';
+--SeÃƒÂ±ales del contador de datos
+  RESET_CONT <= '1' when (estado_q=ResetDeDatos or estado_q=FIN_NC) else '0';
   EN_CONT <= '1' when (estado_q=RecibirDat) else '0';
---Señales de contador de tiempo
+--SeÃ±ales de contador de tiempo
   RESET_CONT_TIME <= '1' when (estado_q=RecibirDat or estado_q=ResetDeDatos or estado_q=FIN_NC) else '0';
   EN_CONT_TIME <= '1' when (estado_q=TiempoRxD or estado_q=TiempoDat) else '0';
   FIN_CICLO <= '1' when (contime="1010001011001") else '0';
   FIN_TIME <= '1' when (contime="1111010100011") else '0';
---Se�ales de Registro Direccion
+--Señales de Registro Direccion
   LD_POS_W <= '1' when (estado_q=Arriba) else '0';
   LD_POS_A <= '1' when (estado_q=Izquierda) else '0';
   LD_POS_S <= '1' when (estado_q=Abajo) else '0';
