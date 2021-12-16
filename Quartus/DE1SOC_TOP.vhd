@@ -164,6 +164,9 @@ architecture rtl_0 of DE1SOC_TOP is
     FIN           : IN std_logic;
     DIRECCION     : IN  std_logic_vector(1 DOWNTO 0);
     COLOR_CODE    : IN  std_logic_vector(1 DOWNTO 0);
+	 DONE_DEL      : IN std_logic;
+	 DONE_CURSOR   : IN std_logic;
+	 DONE_COLOR    : IN std_logic;
     DEL_SCREEN    : OUT std_logic;
     OP_SETCURSOR  : OUT std_logic;
     XCOL          : OUT std_logic_vector(7 DOWNTO 0);
@@ -234,6 +237,10 @@ architecture rtl_0 of DE1SOC_TOP is
    signal  Done_Drawing        :  std_logic;	
 	signal  Del_Screen          :  std_logic;
 	
+	signal divclk : unsigned(5 downto 0);
+   attribute noprune: boolean;
+   attribute noprune of divclk: signal is true;
+	
 	signal  set_fun              : std_logic;
 
 begin 
@@ -245,19 +252,27 @@ begin
 		  Rx <= GPIO_0(5);
 		  
 		  --Registro señal del Multiplexor
-		   PROCESS (clk,reset_l)
+		   PROCESS (clk,reset_l,FUN_BASICA,FIN_FUN)
 			begin
 				if reset_l='0' then
-					set_fun<='0';
+					set_fun<='1';
 			elsif (clk'event and clk='1') then
 				if FUN_BASICA='1' then
 					set_fun<='1';
 				elsif FIN_FUN='1' then
-				   set_fun<='0';
+				   set_fun<='1';
 				end if;
 			end if;
 			end process;
 		 
+		   process (CLOCK_50, KEY(0))
+			begin
+				if KEY(0)='0' then
+					divclk <= "000000";
+				elsif (CLOCK_50'event and CLOCK_50='1') then
+					divclk <= divclk +1;
+			end if;
+			end process;
 			--Multiplexores de entrada
 			OP_SetCursor  <= OP_SetCursor_A when (set_fun='0')  else OP_SetCursor_B;
          XCol          <= XCol_A when (set_fun='0')  else XCol_B;
@@ -293,7 +308,6 @@ begin
       LT24_Init_Done      => LT24_Init_Done
  );
    LEDR(9)  <= LT24_Init_Done;
-	LEDR(3)  <=  Done_Drawing;
 
   DUT_LCD_Ctrl:LCD_Ctrl  
     port map (
@@ -333,7 +347,7 @@ begin
       clk          => clk,
       reset_l      => reset_l,
        -- OP: Delete Screen Draw al Screen with black pixels 
-       Del_Screen          => Del_Screen_A,
+       Del_Screen          => Del_Screen,
        -- OP: Draw a Diagonal Line 
        Draw_Diag           => Draw_Diag,
        Colour              => SW(1 downto 0),
@@ -353,6 +367,11 @@ begin
    );
 	
 	LEDR(6)  <= not(Rx);
+   LEDR(5)  <= Del_Screen_B;
+	LEDR(2)  <= Done_Drawing_A;
+	LEDR(1)  <= Fun_Basica;
+	LEDR(3)  <= not(set_fun);
+	LEDR(0)  <= Del_Screen;
 	
 	DUT_LCD_UART:LCD_UART
 	  port map (
@@ -360,7 +379,7 @@ begin
 		 reset_l      => reset_l,
        RxD 	        => Rx,
        DONE_DRAWING => Done_Drawing,
-       DEL_SCREEN   => Del_Screen,
+       DEL_SCREEN   => Del_Screen_A,
        DRAW_DIAG    => Draw_Diag,
 		 FUN_BASICA   => Fun_Basica,
 		 FIN_FUN      => Fin_Fun,
@@ -377,6 +396,9 @@ begin
 		 FIN           => Fin_Fun,
 		 DIRECCION     => Direccion,
 		 COLOR_CODE    => SW(1 downto 0),
+		 DONE_DEL      => Done_Drawing_A,
+	    DONE_CURSOR   => Done_SetCursor,
+	    DONE_COLOR    => Done_DrawColor,
 		 DEL_SCREEN    => Del_Screen_B,
 		 OP_SETCURSOR  => OP_SetCursor_B,
 		 XCOL          => XCol_B,
