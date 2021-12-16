@@ -272,7 +272,7 @@ begin
 				if reset_l='0' then
 					set_fun_o<='0';
 			elsif (clk'event and clk='1') then
-				elsif Del_Screen_B='1' then 
+				if Del_Screen_B='1' then 
 				   set_fun_o<='0';
 				elsif Done_Drawing_A='1' then
 				   set_fun_o<='1';
