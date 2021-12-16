@@ -3,7 +3,7 @@ USE IEEE.STD_LOGIC_1164.all;
 USE IEEE.NUMERIC_STD.all;
 
 ENTITY LCD_BASICA IS
-  PORT (
+	PORT (
     clk           : IN std_logic; 
     reset_l       : IN std_logic;
     FUN_BASICA    : IN std_logic;
@@ -11,6 +11,9 @@ ENTITY LCD_BASICA IS
     FIN           : IN std_logic;
     DIRECCION     : IN  std_logic_vector(1 DOWNTO 0);
     COLOR_CODE    : IN  std_logic_vector(1 DOWNTO 0);
+    DONE_DEL      : IN std_logic;
+    DONE_CURSOR   : IN std_logic;
+    DONE_COLOR    : IN std_logic;
     DEL_SCREEN    : OUT std_logic;
     OP_SETCURSOR  : OUT std_logic;
     XCOL          : OUT std_logic_vector(7 DOWNTO 0);
@@ -23,7 +26,7 @@ ENTITY LCD_BASICA IS
 END LCD_BASICA;
 
 ARCHITECTURE arch1 OF LCD_BASICA IS
-   TYPE ESTADO IS (Inicio,Inicializar,Posicionar,Dibujar,DoneDrawing,EsperaCom,CargarComando,XIzF,XIzN,XDrF,XDrN,YAbF,YAbN,YArF,YArN,Esp1);
+	TYPE ESTADO IS (Inicio,Inicializar,Posicionar,Dibujar,DoneDrawing,EsperaCom,CargarComando,XIzF,XIzN,XDrF,XDrN,YAbF,YAbN,YArF,YArN,Esp1,EspBorrar,EspCursor,EspColor);
    SIGNAL estado_q, estado_d: ESTADO;
 --Registro de X
    SIGNAL pos_x    : unsigned(7 DOWNTO 0);
@@ -45,7 +48,7 @@ ARCHITECTURE arch1 OF LCD_BASICA IS
    
 
 BEGIN
-   PROCESS (estado_q, estado_d, FUN_BASICA, MOVE, FIN, DIRECCION)
+   PROCESS (estado_q, estado_d, FUN_BASICA, DONE_DEL, DONE_CURSOR, DONE_COLOR, MOVE, FIN, DIRECCION)
    begin
   case estado_q is
    when Inicio => if FUN_BASICA='1' then 
@@ -53,9 +56,25 @@ BEGIN
                   else 
                       estado_d<=Inicio;
                   end if;
-   when Inicializar => estado_d<=Posicionar;
-   when Posicionar  => estado_d<=Dibujar;
-   when Dibujar     => estado_d<=DoneDrawing;
+   when Inicializar => estado_d<=EspBorrar;
+	when EspBorrar   => if DONE_DEL='1' then
+									estado_d<=Posicionar;
+							  else
+							      estado_d<=EspBorrar;
+							  end if;
+   when Posicionar  => estado_d<=EspCursor;
+	when EspCursor   => if DONE_CURSOR='1' then
+									estado_d<=Dibujar;
+							  else
+							      estado_d<=EspCursor;
+							  end if;
+   when Dibujar     => estado_d<=EspColor;
+   
+	when EspColor   => if DONE_COLOR='1' then
+									estado_d<=DoneDrawing;
+							  else
+							      estado_d<=EspColor;
+							  end if;
    when DoneDrawing => estado_d<=EsperaCom;
    when EsperaCom   => if MOVE='1' then 
                            estado_d<=CargarComando; 
@@ -139,7 +158,7 @@ NUM_PIX <= "00000000000000001";
       process(clk, reset_l,IZ_POSX,DR_POSX,RES_X,FIN_X,LD_POSXM)
       begin
         if reset_l='0' then
-          pos_x <= (others => '0');
+          pos_x <= "00000000";
         elsif (clk'event and clk='1') then
           if IZ_POSX='1' then
             pos_x <= pos_x - 1;
@@ -158,7 +177,7 @@ NUM_PIX <= "00000000000000001";
       process(clk, reset_l,AR_POSY,AB_POSY,RES_Y,FIN_Y,LD_POSYM)
       begin
         if reset_l='0' then
-          pos_x <= (others => '0');
+          pos_y <= "000000000";
         elsif (clk'event and clk='1') then
           if AR_POSY='1' then
             pos_y <= pos_y - 1;

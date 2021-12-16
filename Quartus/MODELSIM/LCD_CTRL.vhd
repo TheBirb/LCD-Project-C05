@@ -194,7 +194,7 @@ LCD_DATA<="0000000000101010" when (sel_data="000")
     if LD_CONT_PIX='1' then
       cntrgb <= NUMPIX;
     elsif EN_CONT_PIX='1' then
-		cntrgb <= cntrgb -1;
+      cntrgb <= cntrgb -1;
     end if;
   end if;
    end process;
