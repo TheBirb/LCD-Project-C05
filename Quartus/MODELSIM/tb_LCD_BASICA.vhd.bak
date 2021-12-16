@@ -1,0 +1,82 @@
+library ieee; 
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity tb_basica  is 
+end; 
+
+architecture a of tb_basica is
+  component LCD_BASICA
+    port ( 
+    clk           : IN std_logic; 
+    reset_l       : IN std_logic;
+    FUN_BASICA    : IN std_logic;
+    MOVE          : IN std_logic;
+    FIN           : IN std_logic;
+    DIRECCION     : IN  std_logic_vector(1 DOWNTO 0);
+    COLOR_CODE    : IN  std_logic_vector(1 DOWNTO 0);
+    DEL_SCREEN    : OUT std_logic;
+    OP_SETCURSOR  : OUT std_logic;
+    XCOL          : OUT std_logic_vector(7 DOWNTO 0);
+    YROW          : OUT std_logic_vector(8 DOWNTO 0);
+    OP_DRAWCOLOUR : OUT std_logic;
+    RGB           : OUT std_logic_vector(15 DOWNTO 0);
+    NUM_PIX       : OUT std_logic_vector(16 DOWNTO 0);
+    DONE_DRAWING  : OUT std_logic
+	 ); 
+  end component ; 
+-- *** y declarar como señales internas todas las señales del port()
+-- *** usando el mismo nombre
+-- *** Además, pueden inicializarse las entradas para t=0
+  signal tb_clk            : std_logic := '1'; 
+  signal tb_reset          : std_logic := '0'; 
+  signal tb_fun_basica     : std_logic := '0';
+  signal tb_move           : std_logic := '0';
+  signal tb_fin            : std_logic := '0';
+  signal tb_direccion      : std_logic_vector (1 downto 0);
+  signal tb_color_code     : std_logic_vector (1 downto 0);
+  signal tb_del_screen     : std_logic := '0';
+  signal tb_op_setcursor   : std_logic := '0';
+  signal tb_xcol           : std_logic_vector (7 downto 0);
+  signal tb_yrow           : std_logic_vector (8 downto 0);
+  signal tb_op_drawcolour  : std_logic:='0';
+  signal tb_rgb            : std_logic_vector (15 downto 0);
+  signal tb_num_pix        : std_logic_vector (16 downto 0);
+  signal tb_done_drawing   : std_logic :='0';
+
+--	...
+--	...
+--	...
+begin
+  -- instancia del módulo a testear
+  DUT: LCD_BASICA
+  port map ( 
+-- *** incluir todas las señales del port()
+    clk           => tb_clk,
+    reset_l       => tb_reset,
+    FUN_BASICA    => tb_fun_basica,
+    MOVE          => tb_move,
+    FIN           => tb_fin,
+    DIRECCION     => tb_direccion,
+    COLOR_CODE    => tb_color_code,
+    DEL_SCREEN    => tb_del_screen,
+    OP_SETCURSOR  => tb_op_setcursor,
+    XCOL          => tb_xcol,
+    YROW          => tb_yrow,
+    OP_DRAWCOLOUR => tb_op_drawcolour,
+    RGB           => tb_rgb,
+    NUM_PIX       => tb_num_pix,
+    DONE_DRAWING  => tb_done_drawing
+  );
+
+  -- definicion del reloj
+  tb_clk <= not tb_clk after 10 ns; -- per?odo 20ns -> 50 MHz
+
+  -- definicion de estimulos de entrada
+  process
+    begin
+    wait for 50 ns;      
+      tb_reset <= '1';
+    wait;
+  end process;
+end;

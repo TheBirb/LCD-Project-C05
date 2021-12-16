@@ -64,7 +64,7 @@ BEGIN
     			end if;
       when RecibirDat => estado_d<=TiempoDat;
       when ProcesarDato => if COMPE='1' then
-        			estado_d<=EnviarBorrado;
+										estado_d<=EnviarBorrado;
                           elsif COMPQ='1' then
                             	estado_d<=EnviarDiagonal;
                           elsif COMPB='1' then

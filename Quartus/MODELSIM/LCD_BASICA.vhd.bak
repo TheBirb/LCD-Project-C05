@@ -26,7 +26,7 @@ ENTITY LCD_BASICA IS
 END LCD_BASICA;
 
 ARCHITECTURE arch1 OF LCD_BASICA IS
-	TYPE ESTADO IS (Inicio,Inicializar,Posicionar,Final,Dibujar,DoneDrawing,EsperaCom,CargarComando,XIzF,XIzN,XDrF,XDrN,YAbF,YAbN,YArF,YArN,Esp1,EspBorrar,EspCursor,EspColor);
+	TYPE ESTADO IS (Inicio,Inicializar,Posicionar,Dibujar,DoneDrawing,EsperaCom,CargarComando,XIzF,XIzN,XDrF,XDrN,YAbF,YAbN,YArF,YArN,Esp1,EspBorrar,EspCursor,EspColor);
    SIGNAL estado_q, estado_d: ESTADO;
 --Registro de X
    SIGNAL pos_x    : unsigned(7 DOWNTO 0);
@@ -68,22 +68,20 @@ BEGIN
 							  else
 							      estado_d<=EspCursor;
 							  end if;
-   when Dibujar     => estado_d<=EspColor;
-   
+   when Dibujar     => estado_d<=DoneDrawing;
+   when DoneDrawing => estado_d<=EspColor;
 	when EspColor   => if DONE_COLOR='1' then
-									estado_d<=DoneDrawing;
+									estado_d<=EsperaCom;
 							  else
 							      estado_d<=EspColor;
 							  end if;
-   when DoneDrawing => estado_d<=EsperaCom;
    when EsperaCom   => if MOVE='1' then 
                            estado_d<=CargarComando; 
                        elsif FIN='1' then
-                           estado_d<=Final;
+                           estado_d<=Inicio;
                        else
                            estado_d<=EsperaCom;
                        end if;
-   when Final       => estado_d<=Inicio; 
    when CargarComando => if DIRECCION="00" and POS_X="00000000" then
                              estado_d<=XIzF;
                          elsif DIRECCION="00" then
@@ -120,7 +118,7 @@ OP_SETCURSOR <= '1' when (estado_q=Posicionar) else '0';
 --Señal de Dibujar 
 OP_DRAWCOLOUR<= '1' when (estado_q=Dibujar) else '0';
 --Señal de Confirmar dibujar
-DONE_DRAWING <= '1' when (estado_q=DoneDrawing or estado_q=Final) else '0';
+DONE_DRAWING <= '1' when (estado_q=DoneDrawing) else '0';
 --Cargar Posicion X
 IZ_POSX  <= '1' when (estado_q=XIzN) else '0';
 DR_POSX  <= '1' when (estado_q=XDrN) else '0';
