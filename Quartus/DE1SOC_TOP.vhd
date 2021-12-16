@@ -242,6 +242,7 @@ architecture rtl_0 of DE1SOC_TOP is
    attribute noprune of divclk: signal is true;
 	
 	signal  set_fun              : std_logic;
+	signal  set_fun_o            : std_logic;
 
 begin 
         --  Input PINs Asignements
@@ -255,16 +256,31 @@ begin
 		   PROCESS (clk,reset_l,FUN_BASICA,FIN_FUN)
 			begin
 				if reset_l='0' then
-					set_fun<='1';
+					set_fun<='0';
 			elsif (clk'event and clk='1') then
 				if FUN_BASICA='1' then
 					set_fun<='1';
 				elsif FIN_FUN='1' then
-				   set_fun<='1';
+				   set_fun<='0';
 				end if;
 			end if;
 			end process;
-		 
+			
+			--Registro señal del Multiplexor
+			PROCESS (clk,reset_l,Del_Screen_B,Done_Drawing_A)
+			begin
+				if reset_l='0' then
+					set_fun_o<='0';
+			elsif (clk'event and clk='1') then
+				elsif Del_Screen_B='1' then 
+				   set_fun_o<='0';
+				elsif Done_Drawing_A='1' then
+				   set_fun_o<='1';
+				end if;
+			end if;
+			end process;
+			
+			
 		   process (CLOCK_50, KEY(0))
 			begin
 				if KEY(0)='0' then
@@ -274,12 +290,13 @@ begin
 			end if;
 			end process;
 			--Multiplexores de entrada
-			OP_SetCursor  <= OP_SetCursor_A when (set_fun='0')  else OP_SetCursor_B;
-         XCol          <= XCol_A when (set_fun='0')  else XCol_B;
-         YRow          <= YRow_A when (set_fun='0')  else YRow_B;
-         OP_DrawColour <= OP_DrawColour_A when (set_fun='0')  else OP_DrawColour_B;
-         NUMPIX        <= NUMPIX_A when (set_fun='0')  else NUMPIX_B;
-         RGB           <= RGB_A when (set_fun='0')  else RGB_B;
+			OP_SetCursor  <= OP_SetCursor_A when (set_fun='0') else OP_SetCursor_A when (set_fun='1' and set_fun_o='0') else OP_SetCursor_B;
+         XCol          <= XCol_A when (set_fun='0') else XCol_A when (set_fun='1' and set_fun_o='0') else XCol_B;
+         YRow          <= YRow_A when (set_fun='0') else YRow_A when (set_fun='1' and set_fun_o='0')  else YRow_B;
+         OP_DrawColour <= OP_DrawColour_A when (set_fun='0') else OP_DrawColour_A when (set_fun='1' and set_fun_o='0')  else OP_DrawColour_B;
+         NUMPIX        <= NUMPIX_A when (set_fun='0') else NUMPIX_A when (set_fun='1' and set_fun_o='0') else NUMPIX_B;
+         RGB           <= RGB_A when (set_fun='0') else RGB_A when (set_fun='1' and set_fun_o='0') else RGB_B;
+			
          Done_Drawing  <= Done_Drawing_A when (set_fun='0')  else Done_Drawing_B;	
 	      Del_Screen    <= Del_Screen_A when (set_fun='0')  else Del_Screen_B;
 
