@@ -90,7 +90,7 @@ BEGIN
       when Abajo =>estado_d<=Mover;
       when Derecha =>estado_d<=Mover;
       when Mover =>estado_d<=ResetDeDatos;
-      when FinFuncion =>estado_d<=ResetDeDatos;
+      when FinFuncion =>estado_d<=FIN_NC;
       when ResetDeDatos => estado_d<=Fin;
       when TiempoRxD => if FIN_TIME='1' then
 				estado_d<=RecibirDat;
