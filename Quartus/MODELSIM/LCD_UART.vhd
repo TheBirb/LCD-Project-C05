@@ -5,7 +5,7 @@ USE IEEE.NUMERIC_STD.all;
 ENTITY LCD_UART IS
   PORT (
     clk          : IN   std_logic;
-    RxD 	 : IN   std_logic;
+    RxD 	        : IN   std_logic;
     reset_l      : IN   std_logic;
     DONE_DRAWING : IN   std_logic;
     DEL_SCREEN   : OUT  std_logic;
@@ -66,7 +66,7 @@ BEGIN
     			end if;
       when RecibirDat => estado_d<=TiempoDat;
       when ProcesarDato => if COMPE='1' then
-										estado_d<=EnviarBorrado;
+				estado_d<=EnviarBorrado;
                           elsif COMPQ='1' then
                             	estado_d<=EnviarDiagonal;
                           elsif COMPB='1' then
