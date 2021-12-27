@@ -149,6 +149,7 @@ architecture rtl_0 of DE1SOC_TOP is
       DEL_SCREEN 	 : OUT  std_logic;
       DRAW_DIAG 	 : OUT  std_logic;
 		FUN_BASICA   : OUT  std_logic;
+		FUN_JUEGO    : OUT  std_logic;
 		FIN_FUN      : OUT  std_logic;
 		MOVE         : OUT  std_logic;
 		POSICION     : OUT  std_logic_vector(1 DOWNTO 0) 
@@ -160,6 +161,29 @@ architecture rtl_0 of DE1SOC_TOP is
     clk           : IN std_logic; 
     reset_l       : IN std_logic;
     FUN_BASICA    : IN std_logic;
+    MOVE          : IN std_logic;
+    FIN           : IN std_logic;
+    DIRECCION     : IN  std_logic_vector(1 DOWNTO 0);
+    COLOR_CODE    : IN  std_logic_vector(1 DOWNTO 0);
+	 DONE_DEL      : IN std_logic;
+	 DONE_CURSOR   : IN std_logic;
+	 DONE_COLOR    : IN std_logic;
+    DEL_SCREEN    : OUT std_logic;
+    OP_SETCURSOR  : OUT std_logic;
+    XCOL          : OUT std_logic_vector(7 DOWNTO 0);
+    YROW          : OUT std_logic_vector(8 DOWNTO 0);
+    OP_DRAWCOLOUR : OUT std_logic;
+    RGB           : OUT std_logic_vector(15 DOWNTO 0);
+    NUM_PIX       : OUT std_logic_vector(16 DOWNTO 0);
+    DONE_DRAWING  : OUT std_logic
+	);
+	end component;
+	
+	component LCD_JUEGO
+	port (
+    clk           : IN std_logic; 
+    reset_l       : IN std_logic;
+    FUN_JUEGO     : IN std_logic;
     MOVE          : IN std_logic;
     FIN           : IN std_logic;
     DIRECCION     : IN  std_logic_vector(1 DOWNTO 0);
@@ -228,6 +252,16 @@ architecture rtl_0 of DE1SOC_TOP is
    signal  Done_Drawing_B      :  std_logic;	
 	signal  Del_Screen_B        :  std_logic;
 	
+	signal  Fun_Juego            : std_logic;
+	signal  OP_SetCursor_C       :  std_logic;
+   signal  XCol_C               :  std_logic_vector(7 downto 0);
+   signal  YRow_C               :  std_logic_vector(8 downto 0);
+   signal  OP_DrawColour_C     :  std_logic;   -- OP_DrawColour
+   signal  NUMPIX_C            :  std_logic_vector(16 downto 0);
+   signal  RGB_C               :  std_logic_vector(15 downto 0);
+   signal  Done_Drawing_C      :  std_logic;	
+	signal  Del_Screen_C        :  std_logic;
+	
 	signal  OP_SetCursor        :  std_logic;
    signal  XCol                :  std_logic_vector(7 downto 0);
    signal  YRow                :  std_logic_vector(8 downto 0);
@@ -243,6 +277,7 @@ architecture rtl_0 of DE1SOC_TOP is
 	
 	signal  set_fun              : std_logic;
 	signal  set_fun_o            : std_logic;
+	signal  set_fun_j            : std_logic;
 
 begin 
         --  Input PINs Asignements
@@ -253,12 +288,12 @@ begin
 		  Rx <= GPIO_0(5);
 		  
 		  --Registro señal del Multiplexor
-		   PROCESS (clk,reset_l,FUN_BASICA,FIN_FUN)
+		   PROCESS (clk,reset_l,FUN_BASICA,FIN_FUN,FUN_JUEGO)
 			begin
 				if reset_l='0' then
 					set_fun<='0';
 			elsif (clk'event and clk='1') then
-				if FUN_BASICA='1' then
+				if FUN_BASICA='1' or FUN_JUEGO='1' then
 					set_fun<='1';
 				elsif FIN_FUN='1' then
 				   set_fun<='0';
@@ -272,10 +307,24 @@ begin
 				if reset_l='0' then
 					set_fun_o<='0';
 			elsif (clk'event and clk='1') then
-				if Del_Screen_B='1' then 
+				if Del_Screen_B='1' or Del_Screen_C='1' then 
 				   set_fun_o<='0';
 				elsif Done_Drawing_A='1' then
 				   set_fun_o<='1';
+				end if;
+			end if;
+			end process;
+			
+			--Registro señal del Multiplexor
+			PROCESS (clk,reset_l,FUN_JUEGO,FIN_FUN)
+			begin
+				if reset_l='0' then
+					set_fun_j<='0';
+			elsif (clk'event and clk='1') then
+				if FUN_JUEGO='1' then 
+				   set_fun_j<='1';
+				elsif FIN_FUN='1' then
+				   set_fun_j<='0';
 				end if;
 			end if;
 			end process;
@@ -289,16 +338,17 @@ begin
 					divclk <= divclk +1;
 			end if;
 			end process;
-			--Multiplexores de entrada
-			OP_SetCursor  <= OP_SetCursor_A when (set_fun='0') else OP_SetCursor_A when (set_fun='1' and set_fun_o='0') else OP_SetCursor_B;
-         XCol          <= XCol_A when (set_fun='0') else XCol_A when (set_fun='1' and set_fun_o='0') else XCol_B;
-         YRow          <= YRow_A when (set_fun='0') else YRow_A when (set_fun='1' and set_fun_o='0')  else YRow_B;
-         OP_DrawColour <= OP_DrawColour_A when (set_fun='0') else OP_DrawColour_A when (set_fun='1' and set_fun_o='0')  else OP_DrawColour_B;
-         NUMPIX        <= NUMPIX_A when (set_fun='0') else NUMPIX_A when (set_fun='1' and set_fun_o='0') else NUMPIX_B;
-         RGB           <= RGB_A when (set_fun='0') else RGB_A when (set_fun='1' and set_fun_o='0') else RGB_B;
 			
-         Done_Drawing  <= Done_Drawing_A when (set_fun='0')  else Done_Drawing_B;	
-	      Del_Screen    <= Del_Screen_A when (set_fun='0')  else Del_Screen_B;
+			--Multiplexores de entrada
+			OP_SetCursor  <= OP_SetCursor_A when (set_fun='0') else OP_SetCursor_A when (set_fun='1' and set_fun_o='0') else OP_SetCursor_B when (set_fun='1' and set_fun_j='0') else OP_SetCursor_C;
+         XCol          <= XCol_A when (set_fun='0') else XCol_A when (set_fun='1' and set_fun_o='0') else XCol_B when (set_fun='1' and set_fun_j='0') else XCol_C;
+         YRow          <= YRow_A when (set_fun='0') else YRow_A when (set_fun='1' and set_fun_o='0')  else YRow_B when (set_fun='1' and set_fun_j='0') else YRow_C;
+         OP_DrawColour <= OP_DrawColour_A when (set_fun='0') else OP_DrawColour_A when (set_fun='1' and set_fun_o='0')  else OP_DrawColour_B when (set_fun='1' and set_fun_j='0') else OP_DrawColour_C;
+         NUMPIX        <= NUMPIX_A when (set_fun='0') else NUMPIX_A when (set_fun='1' and set_fun_o='0') else NUMPIX_B when (set_fun='1' and set_fun_j='0') else NUMPIX_C;
+         RGB           <= RGB_A when (set_fun='0') else RGB_A when (set_fun='1' and set_fun_o='0') else RGB_B when (set_fun='1' and set_fun_j='0') else RGB_C;
+			
+         Done_Drawing  <= Done_Drawing_A when (set_fun='0')  else Done_Drawing_B when (set_fun_j='0') else Done_drawing_C;	
+	      Del_Screen    <= Del_Screen_A when (set_fun='0')  else Del_Screen_B  when (set_fun_j='0') else Del_Screen_C;
 
 -- Instaciacion de componentes--------------    
 
@@ -385,7 +435,7 @@ begin
 	
 	LEDR(6)  <= not(Rx);
    LEDR(5)  <= Del_Screen_B;
-	LEDR(2)  <= Done_Drawing_A;
+	LEDR(2)  <= Del_Screen_A;
 	LEDR(1)  <= Fun_Basica;
 	LEDR(3)  <= not(set_fun);
 	LEDR(0)  <= Del_Screen;
@@ -399,6 +449,7 @@ begin
        DEL_SCREEN   => Del_Screen_A,
        DRAW_DIAG    => Draw_Diag,
 		 FUN_BASICA   => Fun_Basica,
+		 FUN_JUEGO    => Fun_Juego,
 		 FIN_FUN      => Fin_Fun,
 		 MOVE         => Move,    
 		 POSICION     => Direccion
@@ -424,6 +475,28 @@ begin
 		 RGB           => RGB_B,
 		 NUM_PIX       => NumPix_B,
 		 DONE_DRAWING  => Done_Drawing_B
+	);
+	
+	DUT_LCD_JUEGO:LCD_JUEGO
+	  port map (
+		 clk           => clk,
+		 reset_l       => reset_l,
+		 FUN_JUEGO     => Fun_Juego,
+		 MOVE          => Move,
+		 FIN           => Fin_Fun,
+		 DIRECCION     => Direccion,
+		 COLOR_CODE    => SW(1 downto 0),
+		 DONE_DEL      => Done_Drawing_A,
+	    DONE_CURSOR   => Done_SetCursor,
+	    DONE_COLOR    => Done_DrawColor,
+		 DEL_SCREEN    => Del_Screen_C,
+		 OP_SETCURSOR  => OP_SetCursor_C,
+		 XCOL          => XCol_C,
+		 YROW          => YRow_C,
+		 OP_DRAWCOLOUR => OP_DrawColour_C,
+		 RGB           => RGB_C,
+		 NUM_PIX       => NumPix_C,
+		 DONE_DRAWING  => Done_Drawing_C
 	);
    
 
