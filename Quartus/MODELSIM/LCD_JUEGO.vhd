@@ -58,10 +58,6 @@ ARCHITECTURE arch1 OF LCD_JUEGO IS
    SIGNAL cont_pix     : unsigned(16 DOWNTO 0);
    SIGNAL EN_CONT_PIX  : std_logic;
    SIGNAL RES_CONT_PIX : std_logic;
---Contador de Numero de Pixeles
-   SIGNAL numpix      : unsigned(16 DOWNTO 0);
-   SIGNAL EN_NUMPIX  : std_logic;
-   SIGNAL RES_NUMPIX : std_logic;
 --Señal del multiplexor para alternar entre el jugador y las frutas
    SIGNAL jugador    : std_logic;
    SIGNAL EN_JUGADOR : std_logic;
@@ -101,7 +97,7 @@ BEGIN
 	             end if;
    when Dibujar => estado_d<=EspColor;
    
-   when EspColor => if DONE_COLOR='1' and cont_pix=numpix then
+   when EspColor => if DONE_COLOR='1' and cont_pix="00000000000010100" then
 		        estado_d<=ResYPix;
 		    elsif DONE_COLOR='0' then
 		        estado_d<=EspColor;
@@ -207,9 +203,7 @@ RGB <= "0000000000000000" when (color="00" and jugador='1')
 	else "1111100000011111" when (jugador='0')
 	else "0000000000000000";
 --Numero de Pixeles
-NUM_PIX <= "00000000000000101" when (jugador='0') else std_logic_vector(numpix);
-EN_NUMPIX  <= '1' when (estado_q=CargarNuevaFruta) else '0';
-RES_NUMPIX <= '1' when (estado_q=Inicializar) else '0';
+NUM_PIX <= "00000000000000101" when (jugador='0') else "00000000000010100";
 --Contador de Pixeles
 EN_CONT_PIX  <= '1' when (estado_q=ContPix or estado_q=ContPixR) else '0';
 RES_CONT_PIX <= '1' when (estado_q=ResYPix or estado_q=ResYPixR) else '0';
@@ -224,8 +218,26 @@ LD_COLISION <= '1' when (pos_xr+5=pos_x and pos_yr=pos_y) or
                         (pos_xr+3=pos_x and pos_yr=pos_y) or
                         (pos_xr+2=pos_x and pos_yr=pos_y) or
                         (pos_xr+1=pos_x and pos_yr=pos_y) or
-                        (pos_xr=pos_x and pos_yr=pos_y) or
-                        (pos_xr=pos_x+numpix and pos_yr=pos_y) or 
+                        (pos_xr=pos_x+20 and pos_yr=pos_y) or 
+                        (pos_xr=pos_x+19 and pos_yr=pos_y) or
+                        (pos_xr=pos_x+18 and pos_yr=pos_y) or
+                        (pos_xr=pos_x+17 and pos_yr=pos_y) or
+                        (pos_xr=pos_x+16 and pos_yr=pos_y) or
+                        (pos_xr=pos_x+15 and pos_yr=pos_y) or
+                        (pos_xr=pos_x+14 and pos_yr=pos_y) or 
+                        (pos_xr=pos_x+13 and pos_yr=pos_y) or
+                        (pos_xr=pos_x+12 and pos_yr=pos_y) or
+                        (pos_xr=pos_x+11 and pos_yr=pos_y) or
+                        (pos_xr=pos_x+10 and pos_yr=pos_y) or
+                        (pos_xr=pos_x+9 and pos_yr=pos_y) or 
+                        (pos_xr=pos_x+8 and pos_yr=pos_y) or
+                        (pos_xr=pos_x+7 and pos_yr=pos_y) or
+                        (pos_xr=pos_x+6 and pos_yr=pos_y) or
+                        (pos_xr=pos_x+5 and pos_yr=pos_y) or
+                        (pos_xr=pos_x+4 and pos_yr=pos_y) or 
+                        (pos_xr=pos_x+3 and pos_yr=pos_y) or
+                        (pos_xr=pos_x+2 and pos_yr=pos_y) or
+                        (pos_xr=pos_x+1 and pos_yr=pos_y) or
                         (pos_xr=pos_x and pos_yr+5=pos_y) or 
                         (pos_xr=pos_x and pos_yr+4=pos_y) or 
                         (pos_xr=pos_x and pos_yr+3=pos_y) or 
@@ -317,19 +329,6 @@ LD_ELECCIONY <= '1' when (estado_q=CargarNuevaFruta) else '0';
          end if;
         end if;
       end process;
---Contador de Numero de Pixeles
-      process(clk, reset_l,EN_NUMPIX,RES_NUMPIX)
-      begin
-        if reset_l='0' then
-          numpix<= (others => '0');
-        elsif (clk'event and clk='1') then
-         if EN_NUMPIX='1' then
-            numpix <= numpix + 2;
-         elsif RES_NUMPIX='1' then
-            numpix <= "00000000000010100";
-         end if;
-        end if;
-      end process;
 --Registro de XR
       process(clk, reset_l,LD_POS_XR)
       begin
@@ -337,21 +336,21 @@ LD_ELECCIONY <= '1' when (estado_q=CargarNuevaFruta) else '0';
           pos_xr <= "00000000";
         elsif (clk'event and clk='1') then
           if LD_POS_XR='1' and eleccionx="000" then
-            pos_xr <= "10001000";
+            pos_xr <= "11101000";
           elsif LD_POS_XR='1' and eleccionx="001" then
-            pos_xr <= "01001000";
+            pos_xr <= "01001010";
           elsif LD_POS_XR='1' and eleccionx="010" then
-            pos_xr <= "00101000";
+            pos_xr <= "10101000";
           elsif LD_POS_XR='1' and eleccionx="011" then
-            pos_xr <= "00001000";
+            pos_xr <= "00101011";
           elsif LD_POS_XR='1' and eleccionx="100" then
-            pos_xr <= "00010000";
+            pos_xr <= "00010010";
           elsif LD_POS_XR='1' and eleccionx="101" then
-            pos_xr <= "00100000";
+            pos_xr <= "10101000";
           elsif LD_POS_XR='1' and eleccionx="110" then
-            pos_xr <= "01000000";
+            pos_xr <= "01000010";
           elsif LD_POS_XR='1' and eleccionx="111" then
-            pos_xr <= "10000000";
+            pos_xr <= "11111000";
  	  end if;
         end if;
 	end process;
@@ -364,19 +363,19 @@ LD_ELECCIONY <= '1' when (estado_q=CargarNuevaFruta) else '0';
           if LD_POS_YR='1' and elecciony="000" then
             pos_yr <= "100010000";
           elsif LD_POS_YR='1' and elecciony="001"then
-            pos_yr <= "010010000";
+            pos_yr <= "111110000";
           elsif LD_POS_YR='1' and elecciony="010"then
             pos_yr <= "001010000";
           elsif LD_POS_YR='1' and elecciony="011" then
-            pos_yr <= "000010000";
+            pos_yr <= "001010010";
 	  elsif LD_POS_YR='1' and elecciony="100"then
             pos_yr <= "000100000";
           elsif LD_POS_YR='1' and elecciony="101" then
-            pos_yr <= "001000000";
+            pos_yr <= "001000010";
           elsif LD_POS_YR='1' and elecciony="110"then
-            pos_yr <= "010000000";
+            pos_yr <= "010011001";
           elsif LD_POS_YR='1' and elecciony="111" then
-            pos_yr <= "100000000";
+            pos_yr <= "100100010";
 	  elsif AB_YR='1' then
             pos_yr <= pos_yr + 1;
  	  end if;
@@ -413,7 +412,7 @@ LD_ELECCIONY <= '1' when (estado_q=CargarNuevaFruta) else '0';
           elecciony<=  "000";
         elsif (clk'event and clk='1') then
          if LD_ELECCIONY='1' then
-            elecciony <= elecciony + 1;
+            elecciony <= elecciony + 5;
          end if;
         end if;
       end process;
