@@ -91,11 +91,11 @@ BEGIN
                              	       estado_d<=XDrF;
                          	   elsif DIRECCION="01" then
                              	       estado_d<=XDrN;
-                         	   elsif DIRECCION="10" and POS_Y="000000000" then
+                         	   elsif DIRECCION="10" and POS_Y="100111111" then
                              	       estado_d<=YAbF;
                          	   elsif DIRECCION="10" then
                              	       estado_d<=YAbN;
-                         	   elsif DIRECCION="11" and POS_Y="100111111" then
+                         	   elsif DIRECCION="11" and POS_Y="000000000" then
                              	       estado_d<=YArF;
                          	   elsif DIRECCION="11" then
                              	       estado_d<=YArN;
@@ -130,8 +130,8 @@ end process;
 --Cargar Posicion Y 
   AR_POSY  	<= '1' when (estado_q=YArN) else '0';
   AB_POSY  	<= '1' when (estado_q=YAbN) else '0';
-  RES_Y    	<= '1' when (estado_q=YarF) else '0';
-  FIN_Y    	<= '1' when (estado_q=YAbF) else '0';
+  RES_Y    	<= '1' when (estado_q=YAbF) else '0';
+  FIN_Y    	<= '1' when (estado_q=YArF) else '0';
   LD_POSYM 	<= '1' when (estado_q=Inicializar) else '0';
   YROW     	<= std_logic_vector(pos_y);
 --Cargar Color

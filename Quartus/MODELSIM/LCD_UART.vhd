@@ -5,7 +5,7 @@ USE IEEE.NUMERIC_STD.all;
 ENTITY LCD_UART IS
   PORT (
     clk          : IN   std_logic;
-    RxD 	        : IN   std_logic;
+    RxD 	 : IN   std_logic;
     reset_l      : IN   std_logic;
     DONE_DRAWING : IN   std_logic;
     DEL_SCREEN   : OUT  std_logic;
@@ -19,34 +19,34 @@ ENTITY LCD_UART IS
 END LCD_UART;
 
 ARCHITECTURE arch1 of LCD_UART is
-  TYPE ESTADO IS (Inicio,EsperaComando,RecibirDat,ProcesarDato,EnviarBorrado,EnviarDiagonal,EnviarBasica,EnviarJuego,Arriba,Izquierda,Abajo,Derecha,Mover,FinFuncion,Fin,Fin_NC,ResetDeDatos,TiempoRxD,TiempoDat);
+  TYPE ESTADO IS (Inicio,EsperaComando,RecibirDat,ProcesarDato,EnviarBorrado,EnviarDiagonal,EnviarBasica,EnviarJuego,Arriba,Izquierda,Abajo,Derecha,Mover,FinFuncion,Fin,Fin_NC,ResetDeDatos,TiempoRxD,TiempoDat,EsperaFin);
   SIGNAL estado_q,estado_d : ESTADO;
 --CONTADOR DE DATOS UART
-  SIGNAL FIN_CONT : std_logic;
+  SIGNAL FIN_CONT   : std_logic;
   SIGNAL RESET_CONT : std_logic;
-  SIGNAL EN_CONT : std_logic;
-  SIGNAL contd : unsigned(3 downto 0);
+  SIGNAL EN_CONT    : std_logic;
+  SIGNAL contd      : unsigned(3 downto 0);
 --CONTADOR DE DATOS UART
-  SIGNAL FIN_TIME : std_logic;
-  SIGNAL FIN_CICLO : std_logic;
+  SIGNAL FIN_TIME        : std_logic;
+  SIGNAL FIN_CICLO       : std_logic;
   SIGNAL RESET_CONT_TIME : std_logic;
-  SIGNAL EN_CONT_TIME : std_logic;
-  SIGNAL contime : unsigned(12 downto 0);
+  SIGNAL EN_CONT_TIME    : std_logic;
+  SIGNAL contime         : unsigned(12 downto 0);
 --SEÑ€˜ALES DE COMPARADORES
-  SIGNAL Rxd_in : std_logic;
-  SIGNAL COMPE : std_logic;
-  SIGNAL COMPQ : std_logic;
-  SIGNAL COMPB : std_logic;
-  SIGNAL COMPJ : std_logic;
-  SIGNAL COMPW : std_logic;
-  SIGNAL COMPA : std_logic;
-  SIGNAL COMPS : std_logic;
-  SIGNAL COMPD : std_logic;
-  SIGNAL COMPF : std_logic;
+  SIGNAL Rxd_in     : std_logic;
+  SIGNAL COMPE      : std_logic;
+  SIGNAL COMPQ      : std_logic;
+  SIGNAL COMPB      : std_logic;
+  SIGNAL COMPJ      : std_logic;
+  SIGNAL COMPW      : std_logic;
+  SIGNAL COMPA      : std_logic;
+  SIGNAL COMPS      : std_logic;
+  SIGNAL COMPD      : std_logic;
+  SIGNAL COMPF      : std_logic;
 --REGISTRO DE DESPLAZAMIENTO
   SIGNAL EN_DESPLZ_DER : std_logic;
-  SIGNAL REGDPLZ_out : std_logic_vector(7 downto 0);
-  SIGNAL content     : std_logic_vector(7 downto 0);
+  SIGNAL REGDPLZ_out   : std_logic_vector(7 downto 0);
+  SIGNAL content       : std_logic_vector(7 downto 0);
 --REGISTRO DE DIRECCION
   SIGNAL LD_POS_W   : std_logic;
   SIGNAL LD_POS_A   : std_logic;
@@ -54,7 +54,7 @@ ARCHITECTURE arch1 of LCD_UART is
   SIGNAL LD_POS_D   : std_logic;
   SIGNAL direccion  : std_logic_vector(1 downto 0);
 --REGISTRO DE JUEGO
-  SIGNAL juego	  : std_logic;
+  SIGNAL juego	    : std_logic;
   SIGNAL LD_JUEGO   : std_logic;
   SIGNAL NO_JUEGO   : std_logic;
 
@@ -85,7 +85,7 @@ ARCHITECTURE arch1 of LCD_UART is
                             	       estado_d<=Abajo;
                           	   elsif COMPD='1' and juego='1' then
                             	       estado_d<=Derecha;
-                           	   elsif COMPF='1' and juego='1' then
+                           	   elsif COMPF='1' then
                             	       estado_d<=FinFuncion;
                           	   else
                             	       estado_d<=FIN_NC;
@@ -99,7 +99,7 @@ ARCHITECTURE arch1 of LCD_UART is
       when Abajo 		=> estado_d<=Mover;
       when Derecha 		=> estado_d<=Mover;
       when Mover 		=> estado_d<=ResetDeDatos;
-      when FinFuncion 		=> estado_d<=ResetDeDatos;
+      when FinFuncion 		=> estado_d<=Fin_Nc;
       when ResetDeDatos 	=> estado_d<=Fin;
       when TiempoRxD 		=> if FIN_TIME='1' then
 				       estado_d<=RecibirDat;
@@ -114,10 +114,11 @@ ARCHITECTURE arch1 of LCD_UART is
 				       estado_d<=TiempoDat;
 				   end if;
       when Fin			=> if DONE_DRAWING='1' then
-        			       estado_d<=EsperaComando;
+        			       estado_d<=EsperaFin;
     		 		   else
                   		       estado_d<=Fin;
                  		   end if;
+      when EsperaFin		=> estado_d<=EsperaComando;
       when FIN_NC 		=> estado_d<=EsperaComando;
       when others 		=> estado_d<=EsperaComando;
     end case;
