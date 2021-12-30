@@ -307,7 +307,7 @@ begin
 				if reset_l='0' then
 					set_fun_o<='0';
 			elsif (clk'event and clk='1') then
-				if Del_Screen_B='1' or Del_Screen_C='1' then 
+				if Del_Screen_B='1' or Del_Screen_C='1' or FIN_FUN='1' then 
 				   set_fun_o<='0';
 				elsif Done_Drawing_A='1' then
 				   set_fun_o<='1';
@@ -347,8 +347,8 @@ begin
          NUMPIX        <= NUMPIX_A when (set_fun='0') else NUMPIX_A when (set_fun='1' and set_fun_o='0') else NUMPIX_B when (set_fun='1' and set_fun_j='0') else NUMPIX_C;
          RGB           <= RGB_A when (set_fun='0') else RGB_A when (set_fun='1' and set_fun_o='0') else RGB_B when (set_fun='1' and set_fun_j='0') else RGB_C;
 			
-         Done_Drawing  <= Done_Drawing_A when (set_fun='0')  else Done_Drawing_B when (set_fun_j='0') else Done_drawing_C;	
-	      Del_Screen    <= Del_Screen_A when (set_fun='0')  else Del_Screen_B  when (set_fun_j='0') else Del_Screen_C;
+         Done_Drawing  <= Done_Drawing_A when (set_fun='0')  else Done_Drawing_B when (set_fun='1' and set_fun_j='0') else Done_drawing_C;	
+	      Del_Screen    <= Del_Screen_A when (set_fun='0')  else Del_Screen_B  when (set_fun='1' and set_fun_j='0') else Del_Screen_C;
 
 -- Instaciacion de componentes--------------    
 
@@ -435,9 +435,9 @@ begin
 	
 	LEDR(6)  <= not(Rx);
    LEDR(5)  <= Del_Screen_B;
-	LEDR(2)  <= Del_Screen_A;
-	LEDR(1)  <= Fun_Basica;
 	LEDR(3)  <= not(set_fun);
+	LEDR(2)  <= not(set_fun_o);
+	LEDR(1)  <= not(set_fun_j);
 	LEDR(0)  <= Del_Screen;
 	
 	DUT_LCD_UART:LCD_UART
